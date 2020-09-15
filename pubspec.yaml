@@ -23,6 +23,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  #ui helpers
+  expansion_tile_card: ^1.1.0
+  like_button: ^1.0.1
+  #architecture
   get_it:
   stacked:
   stacked_services:
