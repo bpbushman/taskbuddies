@@ -1,5 +1,5 @@
 name: taskbuddies
-description: A new Flutter project.
+description: A new Flutter project for buddies to help eachother with their tasks
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -23,6 +23,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  get_it:
+  stacked:
+  stacked_services:
+  auto_route:
+  injectable:
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -32,6 +37,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner:
+  auto_route_generator:
+  injectable_generator: 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
