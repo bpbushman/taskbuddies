@@ -1,6 +1,7 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:taskbuddies/ui/views/list_view/list_view.dart';
 import 'package:taskbuddies/ui/widgets/constants.dart';
 import 'package:taskbuddies/ui/widgets/custom_icons.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
@@ -10,13 +11,13 @@ class HomeView extends StatelessWidget {
   Widget getViewForIndex(int index) {
     switch (index) {
       case 0:
-        return DummyOne();
+        return TodoListView();
       case 1:
         return DummyTwo();
       case 2:
         return DummyThree();
       default:
-        return DummyOne();
+        return TodoListView();
     }
   }
 

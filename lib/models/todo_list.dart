@@ -2,11 +2,18 @@ import 'package:flutter/material.dart';
 
 class TodoList {
   String title;
+  String description;
   List<Todo> complete;
   List<Todo> incomplete;
   bool isListComplete;
 
-  TodoList({this.complete, this.incomplete, this.isListComplete, this.title});
+  TodoList({
+    this.complete,
+    this.incomplete,
+    this.isListComplete,
+    this.description,
+    this.title,
+  });
 
   void addNewItem(String newItem) {
     Todo item = Todo(item: newItem, note: '', status: false);
