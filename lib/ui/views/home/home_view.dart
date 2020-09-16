@@ -1,6 +1,7 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:taskbuddies/ui/widgets/constants.dart';
 import 'package:taskbuddies/ui/widgets/custom_icons.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
 import 'home_view_model.dart';
@@ -25,7 +26,13 @@ class HomeView extends StatelessWidget {
         builder: (context, model, child) => ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Scaffold(
-                backgroundColor: Colors.grey[100],
+                appBar: AppBar(
+                  title: mainTitle(),
+                  centerTitle: true,
+                  backgroundColor: Colors.grey[300],
+                  elevation: 0.0,
+                ),
+                backgroundColor: Colors.grey[300],
                 bottomNavigationBar: SizedBox(
                   height: 55,
                   child: BottomNavigationBar(
@@ -52,6 +59,10 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
                 body: getViewForIndex(model.currentIndex),
+                floatingActionButton: FloatingActionButton(
+                  child: Icon(Icons.add),
+                  onPressed: null,
+                ),
               ),
             ),
         viewModelBuilder: () => HomeViewModel());
@@ -64,38 +75,37 @@ class DummyOne extends StatelessWidget {
     print('hello from dummy one');
     return Center(
       child: Container(
-          //height: 208,
-          child: Padding(
-        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-        child: ExpansionTileCard(
-          leading: CircleAvatar(
-            child: Text('B'),
-          ),
-          title: Text('Some title'),
-          subtitle: Text('u/dogBuddy'),
-          children: [
-            Text('one'),
-            Text('two'),
-            Text('three'),
-            Text('four'),
-            Text('five'),
-            smallVertSpace(),
-            Divider(
-              height: 0.0,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+          child: ExpansionTileCard(
+            borderRadius: BorderRadius.circular(12),
+            leading: CircleAvatar(
+              child: Text('B'),
             ),
-            ButtonBar(
-              alignment: MainAxisAlignment.center,
-              children: [
-                loveIcon(),
-                mediumHorizontalSpace(),
-                commentIcon(),
-                mediumHorizontalSpace(),
-                Icon(Icons.add_circle_outline)
-              ],
-            )
-          ],
+            title: Text('Some title'),
+            subtitle: Text('u/dogBuddy'),
+            children: [
+              Text('one'),
+              Text('two'),
+              Text('three'),
+              Text('four'),
+              Text('five'),
+              smallVertSpace(),
+              Divider(height: 0.0),
+              ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: [
+                  loveIcon(),
+                  mediumHorizontalSpace(),
+                  commentIcon(),
+                  mediumHorizontalSpace(),
+                  addBuddyIcon()
+                ],
+              )
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
