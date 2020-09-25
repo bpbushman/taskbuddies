@@ -23,7 +23,7 @@ class _ListContainerState extends State<ListContainer> {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+        padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
         child: ExpansionTileCard(
           borderRadius: BorderRadius.circular(12),
           leading: CircleAvatar(
