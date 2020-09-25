@@ -5,12 +5,7 @@ import 'package:taskbuddies/models/todo_list.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view_model.dart';
 import 'package:taskbuddies/ui/widgets/list_widget.dart';
 
-class TodoListView extends StatefulWidget {
-  @override
-  _TodoListViewState createState() => _TodoListViewState();
-}
-
-class _TodoListViewState extends State<TodoListView> {
+class TodoListView extends StatelessWidget {
   addListToWidget(List<TodoList> todo) {
     List<ListContainer> listWidget = [];
     todo.forEach((element) {
@@ -21,6 +16,7 @@ class _TodoListViewState extends State<TodoListView> {
 
   @override
   Widget build(BuildContext context) {
+    print('hello from todo list view');
     return ViewModelBuilder.reactive(
       disposeViewModel: false,
       builder: (context, model, child) => Container(

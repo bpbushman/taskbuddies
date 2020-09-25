@@ -61,10 +61,6 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                   body: getViewForIndex(model.currentIndex),
-                  floatingActionButton: FloatingActionButton(
-                    child: Icon(Icons.add),
-                    onPressed: null,
-                  ),
                 ),
               ),
             ),

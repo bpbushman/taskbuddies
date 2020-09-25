@@ -73,3 +73,15 @@ class _ListContainerState extends State<ListContainer> {
     );
   }
 }
+
+class TaskTile extends StatefulWidget {
+  @override
+  _TaskTileState createState() => _TaskTileState();
+}
+
+class _TaskTileState extends State<TaskTile> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
