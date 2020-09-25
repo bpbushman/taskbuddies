@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:taskbuddies/models/todo_list.dart';
 import 'package:taskbuddies/ui/widgets/custom_icons.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
+import 'package:taskbuddies/ui/widgets/show_modal_button.dart';
 
 class ListContainer extends StatefulWidget {
   final TodoList myList;
@@ -22,13 +23,26 @@ class _ListContainerState extends State<ListContainer> {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+        padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
         child: ExpansionTileCard(
           borderRadius: BorderRadius.circular(12),
           leading: CircleAvatar(
             child: Text('${widget.myList.incomplete.length}'),
           ),
-          title: Text(widget.myList.title),
+          title: Row(
+            children: [
+              Text(widget.myList.title),
+              Text('    ${widget.myList.isListComplete}'),
+              IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    setState(() {
+                      widget.myList.isListComplete =
+                          !widget.myList.isListComplete;
+                    });
+                  }),
+            ],
+          ),
           subtitle: Text(widget.myList.description),
           children: [
             Text('one'),
@@ -36,8 +50,13 @@ class _ListContainerState extends State<ListContainer> {
             Text('three'),
             Text('four'),
             Text('five'),
-            smallVertSpace(),
-            Divider(height: 0.0),
+            Text('one'),
+            Text('two'),
+            Text('three'),
+            Text('four'),
+            Text('five'),
+            //smallVertSpace(),
+            //Divider(height: 0.0),
             ButtonBar(
               alignment: MainAxisAlignment.center,
               children: [
@@ -45,7 +64,7 @@ class _ListContainerState extends State<ListContainer> {
                 mediumHorizontalSpace(),
                 commentIcon(),
                 mediumHorizontalSpace(),
-                Icon(Icons.add_circle_outline),
+                MyActionButton()
               ],
             )
           ],

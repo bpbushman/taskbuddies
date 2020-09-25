@@ -9,6 +9,7 @@ import 'package:injectable/injectable.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../services/third_party_services-module.dart';
+import '../ui/views/list_view/list_view_model.dart';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -25,6 +26,7 @@ GetIt $initGetIt(
       () => thirdPartyServicesModule.navigationService);
   gh.lazySingleton<SnackbarService>(
       () => thirdPartyServicesModule.snackBarService);
+  gh.lazySingleton<TodoListViewModel>(() => TodoListViewModel());
   return get;
 }
 

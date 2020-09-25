@@ -24,45 +24,47 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-        builder: (context, model, child) => ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Scaffold(
-                appBar: AppBar(
-                  title: mainTitle(),
-                  centerTitle: true,
-                  backgroundColor: Colors.grey[300],
-                  elevation: 0.0,
-                ),
-                backgroundColor: Colors.grey[300],
-                bottomNavigationBar: SizedBox(
-                  height: 55,
-                  child: BottomNavigationBar(
-                    iconSize: 24,
-                    showUnselectedLabels: false,
-                    showSelectedLabels: false,
-                    type: BottomNavigationBarType.fixed,
-                    currentIndex: model.currentIndex,
-                    onTap: model.setIndex,
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.home),
-                        title: Text('Home'),
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.notifications),
-                        title: Text('notifications'),
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.list),
-                        title: Text('feed'),
-                      ),
-                    ],
+        builder: (context, model, child) => SafeArea(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Scaffold(
+                  appBar: AppBar(
+                    title: mainTitle(),
+                    centerTitle: true,
+                    backgroundColor: Colors.grey[300],
+                    elevation: 0.0,
                   ),
-                ),
-                body: getViewForIndex(model.currentIndex),
-                floatingActionButton: FloatingActionButton(
-                  child: Icon(Icons.add),
-                  onPressed: null,
+                  backgroundColor: Colors.grey[300],
+                  bottomNavigationBar: SizedBox(
+                    height: 55,
+                    child: BottomNavigationBar(
+                      iconSize: 24,
+                      showUnselectedLabels: false,
+                      showSelectedLabels: false,
+                      type: BottomNavigationBarType.fixed,
+                      currentIndex: model.currentIndex,
+                      onTap: model.setIndex,
+                      items: [
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.home),
+                          title: Text('Home'),
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.notifications),
+                          title: Text('notifications'),
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.list),
+                          title: Text('feed'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  body: getViewForIndex(model.currentIndex),
+                  floatingActionButton: FloatingActionButton(
+                    child: Icon(Icons.add),
+                    onPressed: null,
+                  ),
                 ),
               ),
             ),

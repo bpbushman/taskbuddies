@@ -18,16 +18,11 @@ class TodoList {
   void addNewItem(String newItem) {
     Todo item = Todo(item: newItem, note: '', status: false);
     this.incomplete.add(item);
-    sortItem();
   }
 
   void completeItem(Todo item) {
-    item.setStatusTocomplete();
-    this.complete.add(item);
-    sortItem();
-  }
-
-  void sortItem() {
+    item.toggleStatus();
+    complete.add(item);
     this.incomplete.removeWhere((element) => element.status == true);
   }
 }
@@ -39,13 +34,7 @@ class Todo extends ChangeNotifier {
 
   Todo({this.item, this.note, this.status});
 
-  void setStatusTocomplete() {
-    this.status = true;
-    notifyListeners();
-  }
-
-  void setStatusToFalse() {
-    this.status = false;
-    notifyListeners();
+  void toggleStatus() {
+    this.status = !this.status;
   }
 }
