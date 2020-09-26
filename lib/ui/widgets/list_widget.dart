@@ -15,8 +15,12 @@ class ListContainer extends StatefulWidget {
 }
 
 class _ListContainerState extends State<ListContainer> {
-  Expanded listBuilder(TodoList list, context) {
-    return Expanded(child: ListView.builder(itemBuilder: null));
+  addTodoToWidget(List<Todo> todo) {
+    List<TaskTile> tiles = [];
+    todo.forEach((element) {
+      tiles.add(TaskTile(todo: element));
+    });
+    return tiles;
   }
 
   @override
@@ -32,31 +36,14 @@ class _ListContainerState extends State<ListContainer> {
           title: Row(
             children: [
               Text(widget.myList.title),
-              Text('    ${widget.myList.isListComplete}'),
-              IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    setState(() {
-                      widget.myList.isListComplete =
-                          !widget.myList.isListComplete;
-                    });
-                  }),
             ],
           ),
           subtitle: Text(widget.myList.description),
           children: [
-            Text('one'),
-            Text('two'),
-            Text('three'),
-            Text('four'),
-            Text('five'),
-            Text('one'),
-            Text('two'),
-            Text('three'),
-            Text('four'),
-            Text('five'),
-            //smallVertSpace(),
-            //Divider(height: 0.0),
+            ListView(
+              shrinkWrap: true,
+              children: addTodoToWidget(widget.myList.incomplete),
+            ),
             ButtonBar(
               alignment: MainAxisAlignment.center,
               children: [
@@ -75,6 +62,10 @@ class _ListContainerState extends State<ListContainer> {
 }
 
 class TaskTile extends StatefulWidget {
+  final Todo todo;
+
+  TaskTile({this.todo});
+
   @override
   _TaskTileState createState() => _TaskTileState();
 }
@@ -82,6 +73,14 @@ class TaskTile extends StatefulWidget {
 class _TaskTileState extends State<TaskTile> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Row(
+        children: [
+          IconButton(icon: Icon(Icons.check), onPressed: null),
+          largeHorizontalSpace(),
+          Text('${widget.todo.item}')
+        ],
+      ),
+    );
   }
 }

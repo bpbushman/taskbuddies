@@ -11,10 +11,13 @@ class _MyActionButtonState extends State<MyActionButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      visualDensity: VisualDensity.compact,
       padding: EdgeInsets.all(4),
       icon: Icon(Icons.add_box),
       onPressed: () {
         showModalBottomSheet(
+          backgroundColor: Colors.white,
+          isScrollControlled: true,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(16),
@@ -23,17 +26,19 @@ class _MyActionButtonState extends State<MyActionButton> {
           ),
           context: context,
           builder: (context) => Container(
-            height: 104,
+            height: 384,
             child: Column(
               children: [
                 mediumVertSpace(),
                 Container(
                   width: 320,
                   child: TextFormField(
+                    autofocus: true,
                     controller: myController,
                     decoration: InputDecoration(
                       labelText: 'Add a new task',
-                      fillColor: Colors.grey[200],
+                      focusColor: Colors.grey[200],
+                      fillColor: Colors.grey,
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
                           style: BorderStyle.solid,
@@ -43,6 +48,14 @@ class _MyActionButtonState extends State<MyActionButton> {
                     ),
                   ),
                 ),
+                RaisedButton(
+                  color: Colors.black26,
+                  onPressed: null,
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )
               ],
             ),
           ),
