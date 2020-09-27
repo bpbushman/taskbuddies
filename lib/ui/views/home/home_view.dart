@@ -27,9 +27,14 @@ class HomeView extends StatelessWidget {
                 child: Scaffold(
                   appBar: AppBar(
                     title: mainTitle(),
-                    centerTitle: true,
                     backgroundColor: Colors.transparent,
                     elevation: 0.0,
+                    actions: [
+                      IconButton(
+                        icon: Icon(Icons.search),
+                        onPressed: null,
+                      )
+                    ],
                   ),
                   backgroundColor: Colors.grey[300],
                   bottomNavigationBar: SizedBox(
