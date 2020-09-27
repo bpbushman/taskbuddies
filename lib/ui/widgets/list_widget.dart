@@ -51,7 +51,7 @@ class _ListContainerState extends State<ListContainer> {
                 mediumHorizontalSpace(),
                 commentIcon(),
                 mediumHorizontalSpace(),
-                MyActionButton()
+                MyActionButton(todoList: widget.myList)
               ],
             )
           ],

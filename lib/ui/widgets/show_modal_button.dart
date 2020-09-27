@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:taskbuddies/app/locator.dart';
+import 'package:taskbuddies/models/todo_list.dart';
+import 'package:taskbuddies/ui/views/list_view/list_view_model.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
 
 class MyActionButton extends StatefulWidget {
+  final TodoList todoList;
+
+  MyActionButton({this.todoList});
+
   @override
   _MyActionButtonState createState() => _MyActionButtonState();
 }
@@ -50,7 +57,15 @@ class _MyActionButtonState extends State<MyActionButton> {
                 ),
                 RaisedButton(
                   color: Colors.black26,
-                  onPressed: null,
+                  onPressed: () {
+                    widget.todoList.addNewItem(myController.text);
+                    myController.clear();
+                    locator<TodoListViewModel>().notifyListeners();
+                    Navigator.pop(context);
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                  ),
                   child: Text(
                     'Submit',
                     style: TextStyle(color: Colors.white),

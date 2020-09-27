@@ -6,7 +6,7 @@ import 'package:taskbuddies/ui/views/list_view/list_view_model.dart';
 import 'package:taskbuddies/ui/widgets/list_widget.dart';
 
 class TodoListView extends StatelessWidget {
-  addListToWidget(List<TodoList> todo) {
+  List addListToWidget(List<TodoList> todo) {
     List<ListContainer> listWidget = [];
     todo.forEach((element) {
       listWidget.add(ListContainer(element));

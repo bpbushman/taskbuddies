@@ -28,7 +28,7 @@ class HomeView extends StatelessWidget {
                   appBar: AppBar(
                     title: mainTitle(),
                     centerTitle: true,
-                    backgroundColor: Colors.grey[300],
+                    backgroundColor: Colors.transparent,
                     elevation: 0.0,
                   ),
                   backgroundColor: Colors.grey[300],

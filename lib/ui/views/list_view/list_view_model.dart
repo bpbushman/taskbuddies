@@ -4,6 +4,13 @@ import 'package:taskbuddies/models/todo_list.dart';
 
 @lazySingleton
 class TodoListViewModel extends BaseViewModel {
+  /*void addNewItem(TodoList listTocompare, String newItem) {
+    todoLists.where((element) {
+      element.title == listTocompare.title;
+      element.addNewItem(newItem);
+    });
+  }*/
+
   List<TodoList> todoLists = [
     TodoList(
         complete: [],
