@@ -11,13 +11,17 @@ class BottomSheetService {
     _bottomSheetListener = bottomSheetListener;
   }
 
-  Future<SheetResponse> showBottomSheet({
-    String description,
-    String buttonTitle = 'ok',
-  }) {
+  Future<SheetResponse> showBottomSheet(
+      {String description,
+      String title,
+      String buttonTitle = 'ok',
+      bool toggle}) {
     _bottomSheetCompleter = Completer<SheetResponse>();
-    _bottomSheetListener(
-        SheetRequest(description: description, buttonTitle: buttonTitle));
+    _bottomSheetListener(SheetRequest(
+        title: title,
+        description: description,
+        buttonTitle: buttonTitle,
+        listTaskToggle: toggle));
     return _bottomSheetCompleter.future;
   }
 

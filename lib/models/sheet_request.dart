@@ -1,10 +1,14 @@
 import 'package:flutter/foundation.dart';
 
 class SheetRequest {
+  final String title;
   final String description;
   final String buttonTitle;
+  final bool listTaskToggle;
 
   SheetRequest({
+    this.listTaskToggle,
+    this.title,
     @required this.description,
     @required this.buttonTitle,
   });

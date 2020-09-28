@@ -14,6 +14,7 @@ class BottomSheetManager extends StatefulWidget {
 class _BottomSheetManagerState extends State<BottomSheetManager> {
   BottomSheetService _sheetService = locator<BottomSheetService>();
   TextEditingController myController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
 
   @override
   void initState() {
@@ -27,6 +28,8 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
   }
 
   _showBottomSheet(SheetRequest request) {
+    bool isTask = request.listTaskToggle;
+
     showModalBottomSheet(
       backgroundColor: Colors.white,
       isScrollControlled: true,
@@ -38,9 +41,19 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
       ),
       context: context,
       builder: (context) => Container(
-        height: 384,
+        height: isTask ? 400 : 428,
         child: Column(
           children: [
+            isTask
+                ? mediumVertSpace()
+                : Container(
+                    width: 160,
+                    child: TextFormField(
+                      controller: titleController,
+                      autofocus: true,
+                      decoration: InputDecoration(labelText: request.title),
+                    ),
+                  ),
             mediumVertSpace(),
             Container(
               width: 320,
@@ -66,8 +79,10 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
                 _sheetService.bottomSheetComplete(SheetResponse(
                   confirmed: true,
                   fieldOne: myController.text,
+                  fieldTwo: titleController.text,
                 ));
                 myController.clear();
+                titleController.clear();
                 Navigator.of(context).pop();
               },
               shape: RoundedRectangleBorder(
@@ -77,7 +92,7 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
                 request.buttonTitle,
                 style: TextStyle(color: Colors.white),
               ),
-            )
+            ),
           ],
         ),
       ),

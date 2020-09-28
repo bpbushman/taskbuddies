@@ -23,17 +23,21 @@ class TodoListView extends StatelessWidget {
       builder: (context, model, child) => SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              child: ListView(
-                shrinkWrap: true,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
-                children: addListToWidget(model.todoLists),
-              ),
-            ),
+            model.areListsAvailable()
+                ? Text('No new Lists')
+                : Container(
+                    child: ListView(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+                      children: addListToWidget(model.todoLists),
+                    ),
+                  ),
             smallVertSpace(),
             RaisedButton(
               color: Colors.black26,
-              onPressed: () {},
+              onPressed: () {
+                model.addNewList();
+              },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
               ),
