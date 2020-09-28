@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:taskbuddies/services/managers/bottom_sheet_manager.dart';
+import 'package:taskbuddies/managers/bottom_sheet_manager.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view.dart';
 import 'package:taskbuddies/ui/widgets/constants.dart';
 import 'home_view_model.dart';
