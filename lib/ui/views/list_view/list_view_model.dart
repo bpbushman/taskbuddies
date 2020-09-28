@@ -8,12 +8,12 @@ import 'package:taskbuddies/services/bottom_sheet_service.dart';
 class TodoListViewModel extends BaseViewModel {
   BottomSheetService _bottomSheetService = locator<BottomSheetService>();
 
-  addItem() async {
+  Future<String> addItem() async {
     var newItem = await _bottomSheetService.showBottomSheet(
       description: 'Add a new Item',
     );
     print(newItem.fieldOne);
-    print(newItem.fieldTwo);
+    return newItem.fieldOne;
   }
 
   List<TodoList> todoLists = [

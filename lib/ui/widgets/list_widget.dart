@@ -54,9 +54,13 @@ class _ListContainerState extends State<ListContainer> {
                 commentIcon(),
                 mediumHorizontalSpace(),
                 IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () => locator<TodoListViewModel>().addItem(),
-                )
+                    icon: Icon(Icons.add),
+                    onPressed: () async {
+                      var newItem =
+                          await locator<TodoListViewModel>().addItem();
+                      widget.myList.addNewItem(newItem);
+                      locator<TodoListViewModel>().notifyListeners();
+                    })
               ],
             )
           ],
