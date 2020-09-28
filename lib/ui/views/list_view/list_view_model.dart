@@ -4,6 +4,11 @@ import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/models/todo_list.dart';
 import 'package:taskbuddies/services/bottom_sheet_service.dart';
 
+/*
+  need to make edit features
+  need to make delete/cancel features
+  need to make undo feature
+ */
 @lazySingleton
 class TodoListViewModel extends BaseViewModel {
   BottomSheetService _bottomSheetService = locator<BottomSheetService>();
