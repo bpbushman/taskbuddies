@@ -1,15 +1,20 @@
 import 'package:injectable/injectable.dart';
 import 'package:stacked/stacked.dart';
+import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/models/todo_list.dart';
+import 'package:taskbuddies/services/bottom_sheet_service.dart';
 
 @lazySingleton
 class TodoListViewModel extends BaseViewModel {
-  /*void addNewItem(TodoList listTocompare, String newItem) {
-    todoLists.where((element) {
-      element.title == listTocompare.title;
-      element.addNewItem(newItem);
-    });
-  }*/
+  BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+
+  addItem() async {
+    var newItem = await _bottomSheetService.showBottomSheet(
+      description: 'Add a new Item',
+    );
+    print(newItem.fieldOne);
+    print(newItem.fieldTwo);
+  }
 
   List<TodoList> todoLists = [
     TodoList(

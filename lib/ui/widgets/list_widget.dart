@@ -1,9 +1,11 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
+import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/models/todo_list.dart';
+import 'package:taskbuddies/ui/views/list_view/list_view_model.dart';
 import 'package:taskbuddies/ui/widgets/custom_icons.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
-import 'package:taskbuddies/ui/widgets/show_modal_button.dart';
+//import 'package:taskbuddies/ui/widgets/show_modal_button.dart';
 
 class ListContainer extends StatefulWidget {
   final TodoList myList;
@@ -51,7 +53,10 @@ class _ListContainerState extends State<ListContainer> {
                 mediumHorizontalSpace(),
                 commentIcon(),
                 mediumHorizontalSpace(),
-                MyActionButton(todoList: widget.myList)
+                IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () => locator<TodoListViewModel>().addItem(),
+                )
               ],
             )
           ],
