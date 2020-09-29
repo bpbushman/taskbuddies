@@ -41,7 +41,7 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
       ),
       context: context,
       builder: (context) => Container(
-        height: isTask ? 400 : 428,
+        height: isTask ? 400 : 440,
         child: Column(
           children: [
             isTask
@@ -49,6 +49,7 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
                 : Container(
                     width: 160,
                     child: TextFormField(
+                      textAlign: TextAlign.center,
                       controller: titleController,
                       autofocus: true,
                       decoration: InputDecoration(labelText: request.title),
@@ -74,7 +75,7 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
               ),
             ),
             RaisedButton(
-              color: Colors.black26,
+              color: Colors.green,
               onPressed: () {
                 _sheetService.bottomSheetComplete(SheetResponse(
                   confirmed: true,
