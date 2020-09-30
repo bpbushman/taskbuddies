@@ -5,7 +5,6 @@ import 'package:taskbuddies/models/todo_list.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view_model.dart';
 import 'package:taskbuddies/ui/widgets/custom_icons.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
-//import 'package:taskbuddies/ui/widgets/show_modal_button.dart';
 
 class ListContainer extends StatefulWidget {
   final TodoList myList;
@@ -17,10 +16,14 @@ class ListContainer extends StatefulWidget {
 }
 
 class _ListContainerState extends State<ListContainer> {
-  addTodoToWidget(List<Todo> todo) {
+  addTodoToWidget() {
     List<TaskTile> tiles = [];
-    todo.forEach((element) {
-      tiles.add(TaskTile(todo: element));
+    widget.myList.incomplete.forEach((element) {
+      tiles.add(TaskTile(
+        todo: element,
+        action: () =>
+            locator<TodoListViewModel>().completeTask(element, widget.myList),
+      ));
     });
     return tiles;
   }
@@ -44,7 +47,7 @@ class _ListContainerState extends State<ListContainer> {
           children: [
             ListView(
               shrinkWrap: true,
-              children: addTodoToWidget(widget.myList.incomplete),
+              children: addTodoToWidget(),
             ),
             ButtonBar(
               alignment: MainAxisAlignment.center,
@@ -70,8 +73,9 @@ class _ListContainerState extends State<ListContainer> {
 
 class TaskTile extends StatefulWidget {
   final Todo todo;
+  final Function action;
 
-  TaskTile({this.todo});
+  TaskTile({this.todo, this.action});
 
   @override
   _TaskTileState createState() => _TaskTileState();
@@ -83,7 +87,7 @@ class _TaskTileState extends State<TaskTile> {
     return Container(
       child: Row(
         children: [
-          IconButton(icon: Icon(Icons.check), onPressed: null),
+          IconButton(icon: Icon(Icons.check), onPressed: widget.action),
           largeHorizontalSpace(),
           Text('${widget.todo.item}')
         ],

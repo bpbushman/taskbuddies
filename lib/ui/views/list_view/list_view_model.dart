@@ -18,6 +18,12 @@ class TodoListViewModel extends BaseViewModel {
     return todoLists.isEmpty;
   }
 
+  void completeTask(Todo item, TodoList list) {
+    list.completeItem(item);
+    notifyListeners();
+    print(list.complete.length);
+  }
+
   void addItem(TodoList todoList) async {
     var newItem = await _bottomSheetService.showBottomSheet(
         description: 'Add a new Item', toggle: true);
