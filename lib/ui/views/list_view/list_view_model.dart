@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/models/todo_list.dart';
 import 'package:taskbuddies/services/bottom_sheet_service.dart';
@@ -11,8 +12,9 @@ import 'package:taskbuddies/services/bottom_sheet_service.dart';
  */
 @lazySingleton
 class TodoListViewModel extends BaseViewModel {
-  BottomSheetService _bottomSheetService = locator<BottomSheetService>();
-  List<TodoList> todoLists = [];
+  final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+  final SnackbarService _snackBarService = locator<SnackbarService>();
+  final List<TodoList> todoLists = [];
 
   bool areListsAvailable() {
     return todoLists.isEmpty;
@@ -27,8 +29,8 @@ class TodoListViewModel extends BaseViewModel {
 
   void completeTask(Todo item, TodoList list) {
     list.completeItem(item);
+    _snackBarService.showSnackbar(message: '${item.item} is complete!');
     notifyListeners();
-    print(list.complete.length);
   }
 
   void addItem(TodoList todoList) async {

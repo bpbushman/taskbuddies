@@ -61,16 +61,16 @@ class _ListContainerState extends State<ListContainer> {
                   onPressed: () {
                     locator<TodoListViewModel>().addItem(widget.myList);
                   },
-                )
+                ),
+                IconButton(
+                  icon: Icon(Icons.cancel),
+                  color: Colors.red,
+                  onPressed: () =>
+                      locator<TodoListViewModel>().deleteList(widget.myList),
+                ),
               ],
             )
           ],
-          trailing: IconButton(
-            icon: Icon(Icons.cancel),
-            color: Colors.red,
-            onPressed: () =>
-                locator<TodoListViewModel>().deleteList(widget.myList),
-          ),
         ),
       ),
     );
