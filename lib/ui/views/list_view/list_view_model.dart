@@ -5,17 +5,13 @@ import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/models/todo_list.dart';
 import 'package:taskbuddies/services/bottom_sheet_service.dart';
 
-/*
-  need to make edit features
-  need to make delete/cancel features
-  need to make undo feature
- */
 @lazySingleton
 class TodoListViewModel extends BaseViewModel {
   final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
   final SnackbarService _snackBarService = locator<SnackbarService>();
   final DialogService _dialogService = locator<DialogService>();
   final List<TodoList> todoLists = [];
+  final DateTime timeStamp = DateTime.now();
 
   bool areListsAvailable() {
     return todoLists.isEmpty;
@@ -50,6 +46,7 @@ class TodoListViewModel extends BaseViewModel {
     var newItem = await _bottomSheetService.showBottomSheet(
         description: 'add caption', title: 'add title', toggle: false);
     todoLists.add(TodoList(
+        timeStamp: timeStamp,
         complete: [],
         incomplete: [],
         isListComplete: false,

@@ -3,15 +3,16 @@ class TodoList {
   String description;
   List<Todo> complete;
   List<Todo> incomplete;
+  DateTime timeStamp;
   bool isListComplete;
 
-  TodoList({
-    this.complete,
-    this.incomplete,
-    this.isListComplete,
-    this.description,
-    this.title,
-  });
+  TodoList(
+      {this.complete,
+      this.incomplete,
+      this.isListComplete,
+      this.description,
+      this.title,
+      this.timeStamp});
 
   void completeListStatus() {
     this.isListComplete = !this.isListComplete;
