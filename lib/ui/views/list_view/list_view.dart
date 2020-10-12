@@ -6,6 +6,12 @@ import 'package:taskbuddies/ui/views/list_view/list_view_model.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
 import 'package:taskbuddies/ui/widgets/list_widget.dart';
 
+/*
+    turn the list widget subtiltle into a column to add more 
+    widgets 
+    to interact with
+ */
+
 class TodoListView extends StatelessWidget {
   List addListToWidget(List<TodoList> todo) {
     List<ListContainer> listWidget = [];

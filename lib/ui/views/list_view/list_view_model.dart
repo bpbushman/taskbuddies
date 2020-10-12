@@ -18,6 +18,13 @@ class TodoListViewModel extends BaseViewModel {
     return todoLists.isEmpty;
   }
 
+  void deleteList(TodoList listToDelete) {
+    this.todoLists.removeWhere((element) {
+      return listToDelete.title == element.title;
+    });
+    notifyListeners();
+  }
+
   void completeTask(Todo item, TodoList list) {
     list.completeItem(item);
     notifyListeners();

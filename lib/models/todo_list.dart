@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class TodoList {
   String title;
   String description;
@@ -15,6 +13,10 @@ class TodoList {
     this.title,
   });
 
+  void completeListStatus() {
+    this.isListComplete = !this.isListComplete;
+  }
+
   void addNewItem(String newItem) {
     Todo item = Todo(item: newItem, note: '', status: false);
     this.incomplete.add(item);
@@ -27,7 +29,7 @@ class TodoList {
   }
 }
 
-class Todo extends ChangeNotifier {
+class Todo {
   String item;
   String note;
   bool status;
