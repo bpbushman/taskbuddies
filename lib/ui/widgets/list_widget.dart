@@ -57,13 +57,14 @@ class _ListContainerState extends State<ListContainer> {
                 commentIcon(),
                 mediumHorizontalSpace(),
                 IconButton(
-                  icon: Icon(Icons.add),
+                  icon: Icon(Icons.add_circle),
+                  color: Colors.blue,
                   onPressed: () {
                     locator<TodoListViewModel>().addItem(widget.myList);
                   },
                 ),
                 IconButton(
-                  icon: Icon(Icons.cancel),
+                  icon: Icon(Icons.cancel_rounded),
                   color: Colors.red,
                   onPressed: () =>
                       locator<TodoListViewModel>().deleteList(widget.myList),
@@ -93,7 +94,11 @@ class _TaskTileState extends State<TaskTile> {
     return Container(
       child: Row(
         children: [
-          IconButton(icon: Icon(Icons.check), onPressed: widget.action),
+          IconButton(
+            icon: Icon(Icons.check),
+            onPressed: widget.action,
+            color: Colors.green,
+          ),
           largeHorizontalSpace(),
           Text('${widget.todo.item}')
         ],

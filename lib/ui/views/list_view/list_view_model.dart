@@ -14,17 +14,23 @@ import 'package:taskbuddies/services/bottom_sheet_service.dart';
 class TodoListViewModel extends BaseViewModel {
   final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
   final SnackbarService _snackBarService = locator<SnackbarService>();
+  final DialogService _dialogService = locator<DialogService>();
   final List<TodoList> todoLists = [];
 
   bool areListsAvailable() {
     return todoLists.isEmpty;
   }
 
-  void deleteList(TodoList listToDelete) {
-    this.todoLists.removeWhere((element) {
-      return listToDelete.title == element.title;
-    });
-    notifyListeners();
+  void deleteList(TodoList listToDelete) async {
+    var result = await _dialogService.showConfirmationDialog(
+        description: 'Push ok to delete your list',
+        title: 'Are you sure you want to delete "${listToDelete.title}"');
+    if (result.confirmed) {
+      this.todoLists.removeWhere((element) {
+        return listToDelete.title == element.title;
+      });
+      notifyListeners();
+    }
   }
 
   void completeTask(Todo item, TodoList list) {
