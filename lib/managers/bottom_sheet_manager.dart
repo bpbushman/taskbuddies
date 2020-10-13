@@ -62,6 +62,7 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
                 autofocus: true,
                 controller: myController,
                 decoration: InputDecoration(
+                  //suffixIcon: Icon(Icons.add),
                   labelText: request.description,
                   focusColor: Colors.grey[200],
                   fillColor: Colors.grey,

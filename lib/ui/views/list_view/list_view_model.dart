@@ -19,7 +19,7 @@ class TodoListViewModel extends BaseViewModel {
 
   void deleteList(TodoList listToDelete) async {
     var result = await _dialogService.showConfirmationDialog(
-        description: 'Push ok to delete your list',
+        description: 'Tap Ok to delete your list',
         title: 'Are you sure you want to delete "${listToDelete.title}"');
     if (result.confirmed) {
       this.todoLists.removeWhere((element) {
@@ -44,7 +44,7 @@ class TodoListViewModel extends BaseViewModel {
 
   void addNewList() async {
     var newItem = await _bottomSheetService.showBottomSheet(
-        description: 'add caption', title: 'add title', toggle: false);
+        description: 'add description', title: 'add title', toggle: false);
     todoLists.add(TodoList(
         timeStamp: timeStamp,
         complete: [],
