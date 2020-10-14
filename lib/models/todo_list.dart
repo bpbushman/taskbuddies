@@ -14,6 +14,15 @@ class TodoList {
       this.title,
       this.timeStamp});
 
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'description': description,
+        'complete': complete,
+        'incomplete': incomplete,
+        'timeStamp': timeStamp,
+        'isListComplete': isListComplete,
+      };
+
   void completeListStatus() {
     this.isListComplete = !this.isListComplete;
   }

@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
-import 'package:taskbuddies/managers/user.dart';
+import 'package:taskbuddies/models/user.dart';
 
 @lazySingleton
 class FirestoreService {
   final CollectionReference _userRef = Firestore.instance.collection("users");
+
 //getting users and creating users
   Future createUser(User user) async {
     try {

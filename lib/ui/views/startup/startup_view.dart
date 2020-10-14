@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:taskbuddies/ui/views/startup/sartup_view_model.dart';
+import 'package:taskbuddies/ui/views/startup/startup_view_model.dart';
 
 class StartUpView extends StatelessWidget {
   @override

@@ -27,6 +27,7 @@ class HomeView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 child: Scaffold(
                   appBar: AppBar(
+                    automaticallyImplyLeading: false,
                     title: mainTitle(),
                     backgroundColor: Colors.transparent,
                     elevation: 0.0,

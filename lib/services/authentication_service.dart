@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:taskbuddies/app/locator.dart';
-import 'package:taskbuddies/managers/user.dart';
-
+import 'package:taskbuddies/models/user.dart';
 import 'firestore_service.dart';
 
 @lazySingleton
