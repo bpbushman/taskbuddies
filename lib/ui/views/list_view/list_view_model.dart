@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -17,12 +18,28 @@ class TodoListViewModel extends BaseViewModel {
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
   final FirestoreService _firestoreService = locator<FirestoreService>();
-  final List<TodoList> todoLists = [];
-  final DateTime timeStamp = DateTime.now();
+  List<TodoList> todoLists = [];
+  final Timestamp timeStamp = Timestamp.now();
   String newId = Uuid().v4();
 
   bool areListsAvailable() {
     return todoLists.isEmpty;
+  }
+
+  Future loadUserLists() async {
+    print('hello from loadUserLists');
+    User user = _authenticationService.currentUser;
+    print(user.username);
+    var result = await _firestoreService.getUserLists(user);
+    print(result.toString());
+    if (result is String) {
+      _dialogService.showDialog(
+          title: 'Error loading lists', description: "$result");
+    }
+    todoLists = result;
+
+    notifyListeners();
+    print(result);
   }
 
   Future _createList(TodoList newList, User user) async {
@@ -58,7 +75,7 @@ class TodoListViewModel extends BaseViewModel {
     var newItem = await _bottomSheetService.showBottomSheet(
         description: 'Add a new Item', toggle: true);
     todoList.addNewItem(newItem.fieldOne);
-    _firestoreService.createTask(todoList);
+    _firestoreService.updateList(todoList);
     notifyListeners();
   }
 

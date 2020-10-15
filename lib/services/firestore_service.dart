@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:taskbuddies/models/todo_list.dart';
@@ -27,6 +26,36 @@ class FirestoreService {
     }
   }
 
+  Future getUserLists(User user) async {
+    try {
+      var userLists = await _listRef
+          .document(user.uid)
+          .collection('userLists')
+          .getDocuments()
+          .then((value) {
+        return value.documents.map((data) {
+          data['incomplete'] is List<dynamic> ? print('yes') : print('no');
+          var newList = _newlistFromMap(data['incomplete']);
+          print(newList[0].item);
+          return TodoList(
+              likes: data['likes'] as int,
+              isListComplete: data['isListComplete'] as bool,
+              description: data['description'] as String,
+              title: data['title'] as String,
+              listId: data['listId'] as String,
+              ownerId: data['ownerId'] as String,
+              timeStamp: data['timeStamp'] as Timestamp,
+              complete: _newlistFromMap(data['incomplete']),
+              incomplete: _newlistFromMap(data['incomplete']));
+        }).toList();
+      });
+      print(userLists[0].title);
+      return userLists;
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
   //methods to send and get lists from firebase
   Future createList(TodoList todoList, User user) async {
     try {
@@ -40,17 +69,28 @@ class FirestoreService {
     }
   }
 
-  Future createTask(TodoList list) async {
+  Future updateList(TodoList list) async {
     try {
       await _listRef
           .document(list.ownerId)
           .collection('userLists')
           .document(list.listId)
-          .updateData({"incomplete": list.newListOfMaps(list.incomplete)});
+          .updateData({
+        "incomplete": list.newListOfMaps(list.incomplete),
+        "complete": list.newListOfMaps(list.complete)
+      });
     } catch (e) {
-      print(e);
-      print('list id is ${list.listId}');
       return e.message;
     }
+  }
+
+  List<Todo> _newlistFromMap(List<dynamic> todo) {
+    if (todo.isEmpty) {
+      return [];
+    }
+
+    var tempList = todo.map((e) => Todo.fromData(e)).toList();
+
+    return tempList;
   }
 }

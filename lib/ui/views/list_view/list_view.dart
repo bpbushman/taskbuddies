@@ -25,6 +25,8 @@ class TodoListView extends StatelessWidget {
   Widget build(BuildContext context) {
     print('hello from todo list view');
     return ViewModelBuilder.reactive(
+      onModelReady: (model) => model.loadUserLists(),
+      //fireOnModelReadyOnce: true,
       disposeViewModel: false,
       builder: (context, model, child) => SingleChildScrollView(
         child: Column(

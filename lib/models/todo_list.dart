@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class TodoList {
   String title;
   String description;
   List<Todo> complete;
   List<Todo> incomplete;
-  DateTime timeStamp;
+  Timestamp timeStamp;
   bool isListComplete;
   int likes;
   String listId;
@@ -20,13 +22,25 @@ class TodoList {
       this.ownerId,
       this.timeStamp});
 
+  TodoList.fromMap(Map<String, dynamic> data) {
+    TodoList(
+        likes: data['likes'],
+        isListComplete: data['isListComplete'],
+        description: data['description'],
+        title: data['title'],
+        listId: data['listId'],
+        ownerId: data['ownerId'],
+        timeStamp: data['timeStamp'],
+        incomplete: data['incomplete']);
+  }
+
   Map<String, dynamic> toJson() => {
         'listId': listId,
         'likes': likes,
         'title': title,
         'description': description,
-        'complete': complete,
-        'incomplete': incomplete,
+        'complete': [],
+        'incomplete': [],
         'timeStamp': timeStamp,
         'isListComplete': isListComplete,
         'ownerId': ownerId,
@@ -45,7 +59,7 @@ class TodoList {
   }
 
   void addNewItem(String newItem) {
-    Todo item = Todo(item: newItem, note: '', status: false);
+    Todo item = Todo(item: newItem, status: false);
     this.incomplete.add(item);
   }
 
@@ -58,20 +72,21 @@ class TodoList {
 
 class Todo {
   String item;
-  String note;
   bool status;
 
-  Todo({this.item, this.note, this.status});
+  Todo({this.item, this.status});
 
   Map<String, dynamic> toJson() => {
         'item': item,
         'status': status,
       };
 
-  Todo.fromData(Map<String, dynamic> data)
-      : item = data['item'],
-        note = data['note'],
-        status = data['status'];
+  factory Todo.fromData(dynamic data) {
+    return Todo(
+      item: data['item'] as String,
+      status: data['status'] as bool,
+    );
+  }
 
   void toggleStatus() {
     this.status = !this.status;
