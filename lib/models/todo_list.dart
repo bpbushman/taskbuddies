@@ -22,7 +22,7 @@ class TodoList {
       this.ownerId,
       this.timeStamp});
 
-  TodoList.fromMap(Map<String, dynamic> data) {
+  TodoList.fromMap(DocumentSnapshot data) {
     TodoList(
         likes: data['likes'],
         isListComplete: data['isListComplete'],
@@ -31,7 +31,8 @@ class TodoList {
         listId: data['listId'],
         ownerId: data['ownerId'],
         timeStamp: data['timeStamp'],
-        incomplete: data['incomplete']);
+        incomplete: _newlistFromMap(data['incomplete']),
+        complete: _newlistFromMap(data['complete']));
   }
 
   Map<String, dynamic> toJson() => {
@@ -45,6 +46,14 @@ class TodoList {
         'isListComplete': isListComplete,
         'ownerId': ownerId,
       };
+
+  List<Todo> _newlistFromMap(List<dynamic> todo) {
+    if (todo.isEmpty) {
+      return [];
+    }
+    var tempList = todo.map((e) => Todo.fromData(e)).toList();
+    return tempList;
+  }
 
   List<Map<String, dynamic>> newListOfMaps(List<Todo> list) {
     List<Map<String, dynamic>> tempList = [];

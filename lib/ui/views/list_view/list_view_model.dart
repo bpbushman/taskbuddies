@@ -30,6 +30,7 @@ class TodoListViewModel extends BaseViewModel {
     print('hello from loadUserLists');
     User user = _authenticationService.currentUser;
     print(user.username);
+    print(user.uid);
     var result = await _firestoreService.getUserLists(user);
     print(result.toString());
     if (result is String) {
