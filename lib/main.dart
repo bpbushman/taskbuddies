@@ -13,14 +13,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       initialRoute: Routes.startUpView,
       onGenerateRoute: MyRouter().onGenerateRoute,
       navigatorKey: locator<NavigationService>().navigatorKey,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          backgroundColor: Colors.purple,
+          scaffoldBackgroundColor: Colors.purple,
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          fontFamily: 'Retro'),
     );
   }
 }
+
+//heart icon: Heart by Alice Noir from the Noun Project
+//comment icon: pixelated speech bubble by George Serov from the Noun Project
+//world: pixelated planet earth by Jamison Wieser from the Noun Project
+//home: House by Maxim David from the Noun Project
+//hand: Hand Left Excellent by stefan wetterstrand. from the Noun Project

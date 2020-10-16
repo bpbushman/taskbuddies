@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:taskbuddies/managers/bottom_sheet_manager.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view.dart';
-import 'package:taskbuddies/ui/widgets/constants.dart';
+//import 'package:taskbuddies/ui/widgets/constants.dart';
 import 'home_view_model.dart';
 
 class HomeView extends StatelessWidget {
@@ -28,7 +28,7 @@ class HomeView extends StatelessWidget {
                 child: Scaffold(
                   appBar: AppBar(
                     automaticallyImplyLeading: false,
-                    title: mainTitle(),
+                    title: Text('TASKBUDDIES'),
                     backgroundColor: Colors.transparent,
                     elevation: 0.0,
                     actions: [
@@ -38,11 +38,15 @@ class HomeView extends StatelessWidget {
                       )
                     ],
                   ),
-                  backgroundColor: Colors.grey[300],
-                  bottomNavigationBar: SizedBox(
-                    height: 55,
+                  backgroundColor: Colors.purple,
+                  bottomNavigationBar: Container(
+                    decoration: BoxDecoration(
+                        border: Border(
+                            top: BorderSide(color: Colors.black, width: 2))),
+                    height: 58,
                     child: BottomNavigationBar(
-                      iconSize: 24,
+                      backgroundColor: Colors.yellow[50],
+                      iconSize: 22,
                       showUnselectedLabels: false,
                       showSelectedLabels: false,
                       type: BottomNavigationBarType.fixed,

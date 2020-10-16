@@ -34,6 +34,7 @@ class _ListContainerState extends State<ListContainer> {
       child: Padding(
         padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
         child: ExpansionTileCard(
+          baseColor: Colors.grey[100],
           borderRadius: BorderRadius.circular(12),
           leading: CircleAvatar(
             child: Text('${widget.myList.incomplete.length}'),
@@ -45,6 +46,10 @@ class _ListContainerState extends State<ListContainer> {
           ),
           subtitle: Text(widget.myList.description),
           children: [
+            Divider(
+              color: Colors.black,
+              thickness: 2.0,
+            ),
             ListView(
               shrinkWrap: true,
               children: addTodoToWidget(),
