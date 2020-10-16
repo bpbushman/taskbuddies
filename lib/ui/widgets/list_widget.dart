@@ -46,10 +46,6 @@ class _ListContainerState extends State<ListContainer> {
           ),
           subtitle: Text(widget.myList.description),
           children: [
-            Divider(
-              color: Colors.black,
-              thickness: 2.0,
-            ),
             ListView(
               shrinkWrap: true,
               children: addTodoToWidget(),

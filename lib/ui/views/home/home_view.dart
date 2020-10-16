@@ -19,6 +19,13 @@ class HomeView extends StatelessWidget {
     }
   }
 
+  ImageIcon homeIcon() {
+    return ImageIcon(
+      AssetImage('assets/icons/home.png'),
+      size: 24,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
@@ -40,13 +47,10 @@ class HomeView extends StatelessWidget {
                   ),
                   backgroundColor: Colors.purple,
                   bottomNavigationBar: Container(
-                    decoration: BoxDecoration(
-                        border: Border(
-                            top: BorderSide(color: Colors.black, width: 2))),
                     height: 58,
                     child: BottomNavigationBar(
-                      backgroundColor: Colors.yellow[50],
-                      iconSize: 22,
+                      backgroundColor: Colors.grey[300],
+                      iconSize: 24,
                       showUnselectedLabels: false,
                       showSelectedLabels: false,
                       type: BottomNavigationBarType.fixed,
@@ -54,7 +58,7 @@ class HomeView extends StatelessWidget {
                       onTap: model.setIndex,
                       items: [
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.home),
+                          icon: homeIcon(),
                           label: 'Home',
                         ),
                         BottomNavigationBarItem(
