@@ -34,9 +34,6 @@ class FirestoreService {
           .getDocuments()
           .then((value) {
         return value.documents.map((data) {
-          data['incomplete'] is List<dynamic> ? print('yes') : print('no');
-          var newList = _newlistFromMap(data['incomplete']);
-          print(newList[0].item);
           return TodoList(
               likes: data['likes'] as int,
               isListComplete: data['isListComplete'] as bool,
@@ -49,7 +46,6 @@ class FirestoreService {
               incomplete: _newlistFromMap(data['incomplete']));
         }).toList();
       });
-      print(userLists[0].title);
       return userLists;
     } catch (e) {
       return e.toString();

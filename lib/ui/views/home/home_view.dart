@@ -34,7 +34,7 @@ class HomeView extends StatelessWidget {
                     actions: [
                       IconButton(
                         icon: Icon(Icons.search),
-                        onPressed: null,
+                        onPressed: () => model.runSearch(),
                       )
                     ],
                   ),

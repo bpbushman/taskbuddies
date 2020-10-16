@@ -27,20 +27,14 @@ class TodoListViewModel extends BaseViewModel {
   }
 
   Future loadUserLists() async {
-    print('hello from loadUserLists');
     User user = _authenticationService.currentUser;
-    print(user.username);
-    print(user.uid);
     var result = await _firestoreService.getUserLists(user);
-    print(result.toString());
     if (result is String) {
       _dialogService.showDialog(
           title: 'Error loading lists', description: "$result");
     }
     todoLists = result;
-
     notifyListeners();
-    print(result);
   }
 
   Future _createList(TodoList newList, User user) async {
@@ -51,7 +45,6 @@ class TodoListViewModel extends BaseViewModel {
         description: result,
       );
     }
-    print(result);
   }
 
   void deleteList(TodoList listToDelete) async {
@@ -68,6 +61,7 @@ class TodoListViewModel extends BaseViewModel {
 
   void completeTask(Todo item, TodoList list) {
     list.completeItem(item);
+    _firestoreService.updateList(list);
     _snackBarService.showSnackbar(message: '${item.item} is complete!');
     notifyListeners();
   }

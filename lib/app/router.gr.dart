@@ -20,8 +20,8 @@ class Routes {
   static const String startUpView = '/';
   static const String signupView = '/signup-view';
   static const all = <String>{
-    homeView,
     loginView,
+    homeView,
     startUpView,
     signupView,
   };
@@ -31,7 +31,6 @@ class MyRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.startUpView, page: StartUpView),
@@ -40,15 +39,15 @@ class MyRouter extends RouterBase {
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
-    HomeView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => HomeView(),
-        settings: data,
-      );
-    },
     LoginView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => LoginView(),
+        settings: data,
+      );
+    },
+    HomeView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => HomeView(),
         settings: data,
       );
     },
