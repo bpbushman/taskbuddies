@@ -3,6 +3,7 @@ import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/models/sheet_request.dart';
 import 'package:taskbuddies/services/bottom_sheet_service.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
+import 'package:pixel_border/pixel_border.dart';
 
 class BottomSheetManager extends StatefulWidget {
   final Widget child;
@@ -33,12 +34,10 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
     showModalBottomSheet(
       backgroundColor: Colors.white,
       isScrollControlled: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(16),
-          topRight: Radius.circular(16),
-        ),
-      ),
+      shape: PixelBorder(
+          borderRadius: BorderRadius.circular(20),
+          pixelSize: 5,
+          borderColor: Colors.black),
       context: context,
       builder: (context) => Container(
         height: isTask ? 400 : 440,
@@ -70,12 +69,13 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
                     borderSide: BorderSide(
                       style: BorderStyle.solid,
                     ),
-                    borderRadius: BorderRadius.circular(16),
                   ),
                 ),
               ),
             ),
             RaisedButton(
+              shape: PixelBorder(
+                  borderRadius: BorderRadius.circular(20), pixelSize: 5),
               color: Colors.green,
               onPressed: () {
                 _sheetService.bottomSheetComplete(SheetResponse(
@@ -87,9 +87,6 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
                 titleController.clear();
                 Navigator.of(context).pop();
               },
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-              ),
               child: Text(
                 request.buttonTitle,
                 style: TextStyle(color: Colors.white),

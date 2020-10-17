@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pixel_border/pixel_border.dart';
 import 'package:stacked/stacked.dart';
 import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/models/todo_list.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view_model.dart';
-import 'package:taskbuddies/ui/widgets/helpers.dart';
+//import 'package:taskbuddies/ui/widgets/helpers.dart';
 import 'package:taskbuddies/ui/widgets/list_widget.dart';
 
 class TodoListView extends StatelessWidget {
@@ -34,15 +35,14 @@ class TodoListView extends StatelessWidget {
                       children: addListToWidget(model.todoLists),
                     ),
                   ),
-            smallVertSpace(),
+            //smallVertSpace(),
             RaisedButton(
               color: Colors.black26,
               onPressed: () {
                 model.addNewList();
               },
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-              ),
+              shape: PixelBorder(
+                  borderRadius: BorderRadius.circular(20), pixelSize: 5),
               child: Text(
                 'Make a new List',
                 style: TextStyle(color: Colors.white),

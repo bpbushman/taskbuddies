@@ -29,53 +29,48 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-        builder: (context, model, child) => SafeArea(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Scaffold(
-                  appBar: AppBar(
-                    automaticallyImplyLeading: false,
-                    title: Text('TASKBUDDIES'),
-                    backgroundColor: Colors.transparent,
-                    elevation: 0.0,
-                    actions: [
-                      IconButton(
-                        icon: Icon(Icons.search),
-                        onPressed: () => model.runSearch(),
-                      )
-                    ],
-                  ),
-                  backgroundColor: Colors.purple,
-                  bottomNavigationBar: Container(
-                    height: 58,
-                    child: BottomNavigationBar(
-                      backgroundColor: Colors.grey[300],
-                      iconSize: 24,
-                      showUnselectedLabels: false,
-                      showSelectedLabels: false,
-                      type: BottomNavigationBarType.fixed,
-                      currentIndex: model.currentIndex,
-                      onTap: model.setIndex,
-                      items: [
-                        BottomNavigationBarItem(
-                          icon: homeIcon(),
-                          label: 'Home',
-                        ),
-                        BottomNavigationBarItem(
-                          icon: Icon(Icons.notifications),
-                          label: 'notifications',
-                        ),
-                        BottomNavigationBarItem(
-                          icon: Icon(Icons.list),
-                          label: 'feed',
-                        ),
-                      ],
+        builder: (context, model, child) => Scaffold(
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
+                title: Text('TASKBUDDIES'),
+                backgroundColor: Colors.transparent,
+                elevation: 0.0,
+                actions: [
+                  IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () => model.runSearch(),
+                  )
+                ],
+              ),
+              backgroundColor: Colors.purple,
+              bottomNavigationBar: Container(
+                height: 58,
+                child: BottomNavigationBar(
+                  backgroundColor: Colors.grey[300],
+                  iconSize: 24,
+                  showUnselectedLabels: false,
+                  showSelectedLabels: false,
+                  type: BottomNavigationBarType.fixed,
+                  currentIndex: model.currentIndex,
+                  onTap: model.setIndex,
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: homeIcon(),
+                      label: 'Home',
                     ),
-                  ),
-                  body: BottomSheetManager(
-                    child: getViewForIndex(model.currentIndex),
-                  ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.notifications),
+                      label: 'notifications',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.list),
+                      label: 'feed',
+                    ),
+                  ],
                 ),
+              ),
+              body: BottomSheetManager(
+                child: getViewForIndex(model.currentIndex),
               ),
             ),
         viewModelBuilder: () => HomeViewModel());

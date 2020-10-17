@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   uuid: ^2.2.2
   #ui helpers
+  pixel_border: ^1.0.0
   expansion_tile_card: ^1.1.0
   like_button: ^1.0.1
   google_fonts: ^1.1.0

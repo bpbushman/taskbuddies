@@ -35,7 +35,7 @@ class _ListContainerState extends State<ListContainer> {
         padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
         child: ExpansionTileCard(
           baseColor: Colors.grey[100],
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(0),
           leading: CircleAvatar(
             child: Text('${widget.myList.incomplete.length}'),
           ),
