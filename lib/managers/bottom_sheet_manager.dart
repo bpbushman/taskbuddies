@@ -3,7 +3,6 @@ import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/models/sheet_request.dart';
 import 'package:taskbuddies/services/bottom_sheet_service.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
-import 'package:pixel_border/pixel_border.dart';
 
 class BottomSheetManager extends StatefulWidget {
   final Widget child;
@@ -34,10 +33,7 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
     showModalBottomSheet(
       backgroundColor: Colors.white,
       isScrollControlled: true,
-      shape: PixelBorder(
-          borderRadius: BorderRadius.circular(20),
-          pixelSize: 5,
-          borderColor: Colors.black),
+      shape: pixelBorderProps(),
       context: context,
       builder: (context) => Container(
         height: isTask ? 400 : 440,
@@ -74,8 +70,7 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
               ),
             ),
             RaisedButton(
-              shape: PixelBorder(
-                  borderRadius: BorderRadius.circular(20), pixelSize: 5),
+              shape: pixelBorderProps(),
               color: Colors.green,
               onPressed: () {
                 _sheetService.bottomSheetComplete(SheetResponse(
