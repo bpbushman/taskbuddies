@@ -55,6 +55,7 @@ class TodoListViewModel extends BaseViewModel {
       this.todoLists.removeWhere((element) {
         return listToDelete.title == element.title;
       });
+      _firestoreService.deleteList(listToDelete);
       notifyListeners();
     }
   }

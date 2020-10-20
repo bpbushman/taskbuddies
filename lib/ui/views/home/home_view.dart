@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pixel_border/pixel_border.dart';
 import 'package:stacked/stacked.dart';
+import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/managers/bottom_sheet_manager.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view.dart';
+import 'package:taskbuddies/ui/views/list_view/list_view_model.dart';
 //import 'package:taskbuddies/ui/widgets/constants.dart';
 import 'home_view_model.dart';
 
@@ -71,6 +74,18 @@ class HomeView extends StatelessWidget {
               ),
               body: BottomSheetManager(
                 child: getViewForIndex(model.currentIndex),
+              ),
+              floatingActionButton: RaisedButton(
+                color: Colors.black26,
+                onPressed: () {
+                  locator<TodoListViewModel>().addNewList();
+                },
+                shape: PixelBorder(
+                    borderRadius: BorderRadius.circular(20), pixelSize: 5),
+                child: Text(
+                  'Make a new List',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
         viewModelBuilder: () => HomeViewModel());

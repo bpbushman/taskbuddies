@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pixel_border/pixel_border.dart';
 import 'package:stacked/stacked.dart';
 import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/models/todo_list.dart';
@@ -21,7 +20,7 @@ class TodoListView extends StatelessWidget {
     print('hello from todo list view');
     return ViewModelBuilder.reactive(
       onModelReady: (model) => model.loadUserLists(),
-      //fireOnModelReadyOnce: true,
+      fireOnModelReadyOnce: true,
       disposeViewModel: false,
       builder: (context, model, child) => SingleChildScrollView(
         child: Column(
@@ -35,19 +34,6 @@ class TodoListView extends StatelessWidget {
                       children: addListToWidget(model.todoLists),
                     ),
                   ),
-            //smallVertSpace(),
-            RaisedButton(
-              color: Colors.black26,
-              onPressed: () {
-                model.addNewList();
-              },
-              shape: PixelBorder(
-                  borderRadius: BorderRadius.circular(20), pixelSize: 5),
-              child: Text(
-                'Make a new List',
-                style: TextStyle(color: Colors.white),
-              ),
-            )
           ],
         ),
       ),

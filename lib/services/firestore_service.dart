@@ -80,13 +80,23 @@ class FirestoreService {
     }
   }
 
+  Future deleteList(TodoList list) async {
+    try {
+      await _listRef
+          .document(list.ownerId)
+          .collection('userLists')
+          .document(list.listId)
+          .delete();
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
   List<Todo> _newlistFromMap(List<dynamic> todo) {
     if (todo.isEmpty) {
       return [];
     }
-
     var tempList = todo.map((e) => Todo.fromData(e)).toList();
-
     return tempList;
   }
 }
