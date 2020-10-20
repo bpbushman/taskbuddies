@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:taskbuddies/models/user.dart';
+import 'package:taskbuddies/ui/widgets/helpers.dart';
 
 Container titleTextField(TextEditingController text, String title) {
   return Container(
@@ -40,5 +42,51 @@ IconButton modalButton(Function action) {
     color: Colors.green,
     onPressed: action,
     tooltip: 'Submit!!',
+  );
+}
+
+Container searchResultsList(List<User> listOfUsers) {
+  List<ListTile> listOfTiles = [];
+  listOfUsers.forEach((element) {
+    listOfTiles.add(userTile(element));
+  });
+
+  return Container(
+    height: 400,
+    child: Column(
+      children: [
+        Text('Buddies'),
+        Expanded(
+          child: ListView(children: listOfTiles),
+        ),
+      ],
+    ),
+  );
+}
+
+List<ListTile> userResults(List<User> listOfUsers) {
+  List<ListTile> listOfTiles = listOfUsers.map((e) => userTile(e));
+  return listOfTiles;
+}
+
+Widget userTile(User user) {
+  return ListTile(
+    //leading: CircleAvatar(),
+    title: Text(user.username),
+    subtitle: Text(
+      user.email,
+      style: TextStyle(fontSize: 11),
+    ),
+    trailing: RaisedButton(
+      shape: pixelBorderProps(),
+      color: Colors.blue,
+      onPressed: null,
+      child: Text(
+        'Add Buddy!',
+        style: TextStyle(
+          fontSize: 12,
+        ),
+      ),
+    ),
   );
 }

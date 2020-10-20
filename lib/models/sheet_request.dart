@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:taskbuddies/models/user.dart';
 
 class SheetRequest {
   final String title;
@@ -6,8 +7,10 @@ class SheetRequest {
   final String buttonTitle;
   final bool listTaskToggle;
   final String sheetType;
+  final List<User> list;
 
   SheetRequest({
+    this.list,
     this.sheetType,
     this.listTaskToggle,
     this.title,

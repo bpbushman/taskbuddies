@@ -69,7 +69,7 @@ class TodoListViewModel extends BaseViewModel {
 
   void addItem(TodoList todoList) async {
     var newItem = await _bottomSheetService.showBottomSheet(
-        description: 'Add a new Item', toggle: true);
+        description: 'Add a new Item', sheetType: 'newTask');
     todoList.addNewItem(newItem.fieldOne);
     _firestoreService.updateList(todoList);
     notifyListeners();
@@ -77,7 +77,9 @@ class TodoListViewModel extends BaseViewModel {
 
   void addNewList() async {
     var newItem = await _bottomSheetService.showBottomSheet(
-        description: 'add description', title: 'add title', toggle: false);
+        description: 'add description',
+        title: 'add title',
+        sheetType: 'newList');
     User user = _authenticationService.currentUser;
     TodoList newList = TodoList(
         listId: newId,
