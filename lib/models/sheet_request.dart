@@ -5,8 +5,10 @@ class SheetRequest {
   final String description;
   final String buttonTitle;
   final bool listTaskToggle;
+  final String sheetType;
 
   SheetRequest({
+    this.sheetType,
     this.listTaskToggle,
     this.title,
     @required this.description,

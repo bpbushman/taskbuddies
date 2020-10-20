@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/models/sheet_request.dart';
 import 'package:taskbuddies/services/bottom_sheet_service.dart';
+import 'package:taskbuddies/ui/widgets/bottom_sheet_widgets.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
 
 class BottomSheetManager extends StatefulWidget {
@@ -41,38 +42,12 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
           children: [
             isTask
                 ? mediumVertSpace()
-                : Container(
-                    width: 160,
-                    child: TextFormField(
-                      textAlign: TextAlign.center,
-                      controller: titleController,
-                      autofocus: true,
-                      decoration: InputDecoration(labelText: request.title),
-                    ),
-                  ),
+                : titleTextField(titleController, request.title),
             mediumVertSpace(),
-            Container(
-              width: 320,
-              child: TextFormField(
-                autofocus: true,
-                controller: myController,
-                decoration: InputDecoration(
-                  //suffixIcon: Icon(Icons.add),
-                  labelText: request.description,
-                  focusColor: Colors.grey[200],
-                  fillColor: Colors.grey,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      style: BorderStyle.solid,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            RaisedButton(
-              shape: pixelBorderProps(),
-              color: Colors.green,
-              onPressed: () {
+            customTextField(
+              myController,
+              request.description,
+              modalButton(() {
                 _sheetService.bottomSheetComplete(SheetResponse(
                   confirmed: true,
                   fieldOne: myController.text,
@@ -81,11 +56,7 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
                 myController.clear();
                 titleController.clear();
                 Navigator.of(context).pop();
-              },
-              child: Text(
-                request.buttonTitle,
-                style: TextStyle(color: Colors.white),
-              ),
+              }),
             ),
           ],
         ),
