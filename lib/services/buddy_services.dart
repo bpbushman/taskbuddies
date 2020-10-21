@@ -1,12 +1,57 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
+import 'package:taskbuddies/app/locator.dart';
+import 'package:taskbuddies/models/buddy_request.dart';
 import 'package:taskbuddies/models/user.dart';
+import 'package:taskbuddies/services/authentication_service.dart';
 
-//import 'package:taskbuddies/app/locator.dart';
-//import 'package:taskbuddies/services/authentication_service.dart';
 @lazySingleton
 class BuddyService {
+  final AuthenticationService _authService = locator<AuthenticationService>();
   final CollectionReference _userRef = Firestore.instance.collection("users");
+  final CollectionReference _requestRef =
+      Firestore.instance.collection("requests");
+  final StreamController<List<BuddyRequest>> _requestController =
+      StreamController<List<BuddyRequest>>.broadcast();
+
+  Stream listenToRequests() {
+    String uid = _authService.currentUser.uid;
+    _requestRef
+        .document(uid)
+        .collection("UserRequest")
+        .snapshots()
+        .listen((event) {
+      if (event.documents.isNotEmpty) {
+        var requests = event.documents
+            .map((e) => BuddyRequest.fromData(e.data))
+            .where((element) => element.senderUid != null)
+            .toList();
+        _requestController.add(requests);
+      }
+    });
+    return _requestController.stream;
+  }
+
+  Future handleBuddyRequest(User user) async {
+    User currentUser = _authService.currentUser;
+    print(currentUser.username);
+    BuddyRequest newRequest = BuddyRequest(
+        message: 'this is a new request',
+        senderUid: currentUser.uid,
+        senderUserName: currentUser.username);
+    try {
+      var result = await _requestRef
+          .document(user.uid)
+          .collection('UserRequest')
+          .document(currentUser.uid)
+          .setData(newRequest.toJson());
+      return result;
+    } catch (e) {
+      return e.message.toString();
+    }
+  }
 
   Future handleSearch(String query) async {
     try {

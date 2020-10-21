@@ -5,7 +5,7 @@ import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/managers/bottom_sheet_manager.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view_model.dart';
-//import 'package:taskbuddies/ui/widgets/constants.dart';
+import 'package:taskbuddies/ui/views/notifications/notifications_view.dart';
 import 'home_view_model.dart';
 
 class HomeView extends StatelessWidget {
@@ -14,7 +14,7 @@ class HomeView extends StatelessWidget {
       case 0:
         return TodoListView();
       case 1:
-        return DummyTwo();
+        return NotificationsView();
       case 2:
         return DummyThree();
       default:

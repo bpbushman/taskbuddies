@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/models/user.dart';
+import 'package:taskbuddies/ui/views/home/home_view_model.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
 
 Container titleTextField(TextEditingController text, String title) {
@@ -55,7 +57,12 @@ Container searchResultsList(List<User> listOfUsers) {
     height: 400,
     child: Column(
       children: [
-        Text('Buddies'),
+        Text(
+          'Buddies',
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
         Expanded(
           child: ListView(children: listOfTiles),
         ),
@@ -69,9 +76,14 @@ List<ListTile> userResults(List<User> listOfUsers) {
   return listOfTiles;
 }
 
+/*
+  add buddy request needs a reaction or a type
+  of confirmation after request is sent
+ */
 Widget userTile(User user) {
   return ListTile(
     //leading: CircleAvatar(),
+    //tileColor: Colors.grey[200],
     title: Text(user.username),
     subtitle: Text(
       user.email,
@@ -80,7 +92,7 @@ Widget userTile(User user) {
     trailing: RaisedButton(
       shape: pixelBorderProps(),
       color: Colors.blue,
-      onPressed: null,
+      onPressed: () => locator<HomeViewModel>().sendBuddyRequest(user),
       child: Text(
         'Add Buddy!',
         style: TextStyle(
