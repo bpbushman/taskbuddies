@@ -22,6 +22,13 @@ class HomeView extends StatelessWidget {
     }
   }
 
+  ImageIcon globeIcon() {
+    return ImageIcon(
+      AssetImage('assets/icons/globe.png'),
+      size: 24,
+    );
+  }
+
   ImageIcon homeIcon() {
     return ImageIcon(
       AssetImage('assets/icons/home.png'),
@@ -66,7 +73,7 @@ class HomeView extends StatelessWidget {
                       label: 'notifications',
                     ),
                     BottomNavigationBarItem(
-                      icon: Icon(Icons.list),
+                      icon: globeIcon(),
                       label: 'feed',
                     ),
                   ],

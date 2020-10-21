@@ -11,6 +11,8 @@ import 'package:taskbuddies/services/authentication_service.dart';
 class BuddyService {
   final AuthenticationService _authService = locator<AuthenticationService>();
   final CollectionReference _userRef = Firestore.instance.collection("users");
+  final CollectionReference _buddyRef =
+      Firestore.instance.collection('buddies');
   final CollectionReference _requestRef =
       Firestore.instance.collection("requests");
   final StreamController<List<BuddyRequest>> _requestController =
@@ -32,6 +34,34 @@ class BuddyService {
       }
     });
     return _requestController.stream;
+  }
+
+  Future handleBuddyResponse(BuddyRequest request) async {
+    User currentUser = _authService.currentUser;
+    if (request.accepted) {
+      try {
+        await _buddyRef
+            .add({'uid_one': request.senderUid, 'uid_two': currentUser.uid});
+        _deleteRequest(request);
+        return true;
+      } catch (e) {
+        return e.message.toString();
+      }
+    }
+  }
+
+  Future _deleteRequest(BuddyRequest request) async {
+    User currentUser = _authService.currentUser;
+    try {
+      _requestRef
+          .document(currentUser.uid)
+          .collection('UserRequest')
+          .document(request.senderUid)
+          .delete();
+      return true;
+    } catch (e) {
+      return e.message.toString();
+    }
   }
 
   Future handleBuddyRequest(User user) async {

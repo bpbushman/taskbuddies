@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/models/buddy_request.dart';
 import 'package:taskbuddies/ui/views/notifications/notifications_view_model.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
@@ -33,12 +34,15 @@ class NotificationsView extends StatelessWidget {
 Container requestTile(BuddyRequest request) {
   return Container(
     child: Padding(
-      padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+      padding: EdgeInsets.fromLTRB(12, 0, 12, 8),
       child: ListTile(
         tileColor: Colors.grey[200],
         title: Text('${request.senderUserName} wants to be your buddy'),
         trailing: RaisedButton(
-          onPressed: () => print('accepted!'),
+          onPressed: () {
+            request.accepted = true;
+            locator<NotificationsViewModel>().acceptRequest(request);
+          },
           shape: pixelBorderProps(),
           color: Colors.blue,
           child: Text('accept!'),

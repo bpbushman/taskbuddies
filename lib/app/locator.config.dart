@@ -13,6 +13,7 @@ import '../services/bottom_sheet_service.dart';
 import '../services/buddy_services.dart';
 import '../services/firestore_service.dart';
 import '../ui/views/home/home_view_model.dart';
+import '../ui/views/notifications/notifications_view_model.dart';
 import '../services/third_party_services-module.dart';
 import '../ui/views/list_view/list_view_model.dart';
 
@@ -34,6 +35,7 @@ GetIt $initGetIt(
   gh.lazySingleton<HomeViewModel>(() => HomeViewModel());
   gh.lazySingleton<NavigationService>(
       () => thirdPartyServicesModule.navigationService);
+  gh.lazySingleton<NotificationsViewModel>(() => NotificationsViewModel());
   gh.lazySingleton<SnackbarService>(
       () => thirdPartyServicesModule.snackBarService);
   gh.lazySingleton<TodoListViewModel>(() => TodoListViewModel());
