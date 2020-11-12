@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>398052598508-ide4nm9tvkuv2lfsdn7jnunbom9f95qj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.398052598508-ide4nm9tvkuv2lfsdn7jnunbom9f95qj</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>398052598508-hlit5587jq08fsq2r2k43ptocdq7fdqi.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA4ZzoIq-u3lgNDr4Rv1lRvvUB54hW4vvo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>398052598508</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.taskbuddies</string>
+	<key>PROJECT_ID</key>
+	<string>taskbuddies-d0510</string>
+	<key>STORAGE_BUCKET</key>
+	<string>taskbuddies-d0510.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:398052598508:ios:94a398166cbe574d647bc9</string>
+	<key>DATABASE_URL</key>
+	<string>https://taskbuddies-d0510.firebaseio.com</string>
+</dict>
+</plist>
