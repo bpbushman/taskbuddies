@@ -34,6 +34,7 @@ class _ListContainerState extends State<ListContainer> {
       child: Padding(
         padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
         child: ExpansionTileCard(
+          elevation: 5.0,
           baseColor: Colors.grey[100],
           borderRadius: BorderRadius.circular(0),
           leading: CircleAvatar(
@@ -93,15 +94,16 @@ class _TaskTileState extends State<TaskTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.fromLTRB(0, 0, 8, 0),
       child: Row(
         children: [
           IconButton(
             icon: Icon(Icons.check),
             onPressed: widget.action,
-            color: Colors.green,
+            color: Colors.lightGreen,
           ),
           largeHorizontalSpace(),
-          Text('${widget.todo.item}')
+          Flexible(child: Text('${widget.todo.item}'))
         ],
       ),
     );

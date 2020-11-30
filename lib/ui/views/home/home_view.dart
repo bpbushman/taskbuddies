@@ -114,7 +114,7 @@ class DummyThree extends StatelessWidget {
   Widget build(BuildContext context) {
     print('hello from dummy three');
     return Center(
-      child: Text('announcements'),
+      child: Text('feed'),
     );
   }
 }

@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           backgroundColor: Colors.purple,
           scaffoldBackgroundColor: Colors.purple,
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.orange,
+          //accentColor: Colors.lightGreen,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Retro'),
     );
