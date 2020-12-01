@@ -3,6 +3,7 @@ import 'package:pixel_border/pixel_border.dart';
 import 'package:stacked/stacked.dart';
 import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/managers/bottom_sheet_manager.dart';
+import 'package:taskbuddies/ui/views/feed/feed_view.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view_model.dart';
 import 'package:taskbuddies/ui/views/notifications/notifications_view.dart';
@@ -16,7 +17,7 @@ class HomeView extends StatelessWidget {
       case 1:
         return NotificationsView();
       case 2:
-        return DummyThree();
+        return FeedView();
       default:
         return TodoListView();
     }
@@ -100,25 +101,5 @@ class HomeView extends StatelessWidget {
               ),
             ),
         viewModelBuilder: () => HomeViewModel());
-  }
-}
-
-class DummyTwo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    print('hello from dummy two');
-    return Center(
-      child: Text('notifications'),
-    );
-  }
-}
-
-class DummyThree extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    print('hello from dummy three');
-    return Center(
-      child: Text('feed'),
-    );
   }
 }
