@@ -42,12 +42,16 @@ class HomeView extends StatelessWidget {
         builder: (context, model, child) => Scaffold(
               appBar: AppBar(
                 automaticallyImplyLeading: false,
-                title: Text('TASKBUDDIES'),
+                title: Text(
+                  'TASKBUDDIES',
+                  textAlign: TextAlign.left,
+                ),
                 backgroundColor: Colors.transparent,
                 elevation: 0.0,
                 actions: [
                   IconButton(
                     icon: Icon(Icons.search),
+                    color: Colors.lightGreen,
                     onPressed: () => model.searchForUsers(),
                   )
                 ],

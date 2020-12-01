@@ -10,8 +10,10 @@ import 'package:taskbuddies/services/authentication_service.dart';
 class BuddyService {
   final AuthenticationService _authService = locator<AuthenticationService>();
   final CollectionReference _userRef = Firestore.instance.collection("users");
-  final CollectionReference _buddyRef =
-      Firestore.instance.collection('buddies');
+  final CollectionReference _followerRef =
+      Firestore.instance.collection('followers');
+  final CollectionReference _followingRef =
+      Firestore.instance.collection('following');
   final CollectionReference _requestRef =
       Firestore.instance.collection("requests");
   final StreamController<List<BuddyRequest>> _requestController =
@@ -39,8 +41,12 @@ class BuddyService {
     User currentUser = _authService.currentUser;
     if (request.accepted) {
       try {
-        await _buddyRef
-            .add({'uid_one': request.senderUid, 'uid_two': currentUser.uid});
+        await _followingRef
+            .document(currentUser.uid)
+            .setData({'user': request.senderUid});
+        await _followerRef
+            .document(request.senderUid)
+            .setData({'user': currentUser.uid});
         _deleteRequest(request);
         return true;
       } catch (e) {
