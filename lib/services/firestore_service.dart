@@ -8,6 +8,8 @@ import 'package:taskbuddies/models/user.dart';
 class FirestoreService {
   final CollectionReference _userRef = Firestore.instance.collection("users");
   final CollectionReference _listRef = Firestore.instance.collection("lists");
+  final CollectionReference _feedRef =
+      Firestore.instance.collection('timeline');
 //getting users and creating users
   Future createUser(User user) async {
     try {
@@ -26,6 +28,7 @@ class FirestoreService {
     }
   }
 
+//get user lists
   Future getUserLists(User user) async {
     try {
       var userLists = await _listRef
@@ -35,6 +38,37 @@ class FirestoreService {
           .then((value) {
         return value.documents.map((data) {
           return TodoList(
+              owner: data['owner'] as String,
+              likes: data['likes'] as int,
+              isListComplete: data['isListComplete'] as bool,
+              description: data['description'] as String,
+              title: data['title'] as String,
+              listId: data['listId'] as String,
+              ownerId: data['ownerId'] as String,
+              timeStamp: data['timeStamp'] as Timestamp,
+              complete: _newlistFromMap(data['incomplete']),
+              incomplete: _newlistFromMap(data['incomplete']));
+        }).toList();
+      });
+      return userLists;
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
+// get lists from feed collection
+  Future getFeedLists(User user) async {
+    try {
+      var userLists = await _feedRef
+          .document(user.uid)
+          .collection('timeLinePosts')
+          //.orderBy('timestamp', descending: true)
+          .limit(20)
+          .getDocuments()
+          .then((value) {
+        return value.documents.map((data) {
+          return TodoList(
+              owner: data['owner'] as String,
               likes: data['likes'] as int,
               isListComplete: data['isListComplete'] as bool,
               description: data['description'] as String,

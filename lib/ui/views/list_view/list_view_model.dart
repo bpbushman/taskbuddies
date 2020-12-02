@@ -82,6 +82,7 @@ class TodoListViewModel extends BaseViewModel {
         sheetType: 'newList');
     User user = _authenticationService.currentUser;
     TodoList newList = TodoList(
+        owner: user.username,
         listId: newId,
         likes: 0,
         timeStamp: timeStamp,

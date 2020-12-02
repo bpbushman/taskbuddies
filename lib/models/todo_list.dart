@@ -8,11 +8,13 @@ class TodoList {
   Timestamp timeStamp;
   bool isListComplete;
   int likes;
+  String owner;
   String listId;
   String ownerId;
 
   TodoList(
       {this.complete,
+      this.owner,
       this.likes,
       this.incomplete,
       this.isListComplete,
@@ -24,6 +26,7 @@ class TodoList {
 
   TodoList.fromMap(DocumentSnapshot data) {
     TodoList(
+        owner: data['owner'],
         likes: data['likes'],
         isListComplete: data['isListComplete'],
         description: data['description'],
@@ -36,6 +39,7 @@ class TodoList {
   }
 
   Map<String, dynamic> toJson() => {
+        'owner': owner,
         'listId': listId,
         'likes': likes,
         'title': title,
