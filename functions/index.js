@@ -12,9 +12,9 @@ exports.onCreateFollower = functions.firestore
     // 1) Create followed users posts ref
     const followedUserPostsRef = admin
       .firestore()
-      .collection("posts")
+      .collection("lists")
       .doc(userId)
-      .collection("userPosts");
+      .collection("userLists");
 
     // 2) Create following user's timeline ref
     const timelinePostsRef = admin
@@ -61,7 +61,7 @@ exports.onDeleteFollower = functions.firestore
 
 // when a post is created, add post to timeline of each follower (of post owner)
 exports.onCreatePost = functions.firestore
-  .document("/posts/{userId}/userPosts/{postId}")
+  .document("/lists/{userId}/userLists/{postId}")
   .onCreate(async (snapshot, context) => {
     const postCreated = snapshot.data();
     const userId = context.params.userId;
@@ -90,7 +90,7 @@ exports.onCreatePost = functions.firestore
   });
 
 exports.onUpdatePost = functions.firestore
-  .document("/posts/{userId}/userPosts/{postId}")
+  .document("/lists/{userId}/userLists/{postId}")
   .onUpdate(async (change, context) => {
     const postUpdated = change.after.data();
     const userId = context.params.userId;
@@ -128,7 +128,7 @@ exports.onDeletePost = functions.firestore
   .onDelete(async (snapshot, context) => {
     const userId = context.params.userId;
     const postId = context.params.postId;
-
+    
     // 1) Get all the followers of the user who made the post
     const userFollowersRef = admin
       .firestore()
@@ -151,7 +151,7 @@ exports.onDeletePost = functions.firestore
         .then(doc => {
           if (doc.exists) {
             doc.ref.delete();
-          }
+          } 
         });
     });
   });
