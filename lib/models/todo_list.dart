@@ -7,7 +7,7 @@ class TodoList {
   List<Todo> incomplete;
   Timestamp timeStamp;
   bool isListComplete;
-  int likes;
+  dynamic likes;
   String owner;
   String listId;
   String ownerId;

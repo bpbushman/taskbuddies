@@ -43,15 +43,15 @@ class BuddyService {
       try {
         await _followingRef
             .document(currentUser.uid)
-            .collection('userFollowers')
+            .collection('following')
             .document(request.senderUid)
             .setData({'user': request.senderUid});
         await _followerRef
             .document(request.senderUid)
-            .collection('following')
+            .collection('userFollowers')
             .document(currentUser.uid)
             .setData({'user': currentUser.uid});
-        _deleteRequest(request);
+
         await _followerRef
             .document(currentUser.uid)
             .collection('userFollowers')
