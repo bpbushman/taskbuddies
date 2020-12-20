@@ -16,6 +16,8 @@ class BuddyService {
       Firestore.instance.collection('following');
   final CollectionReference _requestRef =
       Firestore.instance.collection("requests");
+  final CollectionReference _accountabuddyRef =
+      Firestore.instance.collection("accountabuddy");
   final StreamController<List<BuddyRequest>> _requestController =
       StreamController<List<BuddyRequest>>.broadcast();
 
@@ -100,6 +102,24 @@ class BuddyService {
       return result;
     } catch (e) {
       return e.message.toString();
+    }
+  }
+
+  Future accountaBuddyRequest(User user) async {
+    User currentUser = _authService.currentUser;
+    BuddyRequest newRequest = BuddyRequest(
+        message: 'accountabuddy request',
+        senderUid: currentUser.uid,
+        senderUserName: currentUser.username);
+    try {
+      var result = await _accountabuddyRef
+          .document(user.uid)
+          .collection('UserRequest')
+          .document(currentUser.uid)
+          .setData(newRequest.toJson());
+      return result;
+    } catch (e) {
+      return e.toString();
     }
   }
 

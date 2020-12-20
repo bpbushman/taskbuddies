@@ -70,25 +70,29 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
   Container _newListSheet(SheetRequest request) {
     return Container(
       height: 410,
-      child: Column(
-        children: [
-          titleTextField(titleController, request.title),
-          mediumVertSpace(),
-          customTextField(
-            myController,
-            request.description,
-            modalButton(() {
-              _sheetService.bottomSheetComplete(SheetResponse(
-                confirmed: true,
-                fieldOne: myController.text,
-                fieldTwo: titleController.text,
-              ));
-              myController.clear();
-              titleController.clear();
-              Navigator.of(context).pop();
-            }),
-          ),
-        ],
+      child: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Column(
+          children: [
+            titleTextField(titleController, request.title),
+            mediumVertSpace(),
+            customTextField(
+              myController,
+              request.description,
+              modalButton(() {
+                _sheetService.bottomSheetComplete(SheetResponse(
+                  confirmed: true,
+                  fieldOne: myController.text,
+                  fieldTwo: titleController.text,
+                ));
+                myController.clear();
+                titleController.clear();
+                Navigator.of(context).pop();
+              }),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -105,7 +109,9 @@ class _BottomSheetManagerState extends State<BottomSheetManager> {
           pixelSize: 5,
           borderColor: Colors.black),
       context: context,
-      builder: (context) => _selectSheetType(request),
+      builder: (context) => SingleChildScrollView(
+        child: _selectSheetType(request),
+      ),
     );
   }
 }
