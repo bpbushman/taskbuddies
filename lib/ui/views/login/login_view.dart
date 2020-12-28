@@ -17,8 +17,9 @@ class _LoginViewState extends State<LoginView> {
     return InputDecoration(
       labelText: label,
       fillColor: Colors.grey[100],
+      filled: true,
       border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          //borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: Colors.black)),
     );
   }
@@ -27,11 +28,10 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => LoginViewModel(),
-      builder: (context, model, child) => ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Scaffold(
-          body: Padding(
-            padding: EdgeInsets.fromLTRB(24, 40, 24, 0),
+      builder: (context, model, child) => Scaffold(
+        body: Padding(
+          padding: EdgeInsets.fromLTRB(24, 40, 24, 0),
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 Align(

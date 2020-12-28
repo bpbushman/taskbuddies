@@ -58,31 +58,28 @@ class HomeView extends StatelessWidget {
                 ],
               ),
               backgroundColor: Colors.purple,
-              bottomNavigationBar: Container(
-                height: 58,
-                child: BottomNavigationBar(
-                  backgroundColor: Colors.grey[300],
-                  iconSize: 24,
-                  showUnselectedLabels: false,
-                  showSelectedLabels: false,
-                  type: BottomNavigationBarType.fixed,
-                  currentIndex: model.currentIndex,
-                  onTap: model.setIndex,
-                  items: [
-                    BottomNavigationBarItem(
-                      icon: homeIcon(),
-                      label: 'Home',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.notifications),
-                      label: 'notifications',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: globeIcon(),
-                      label: 'feed',
-                    ),
-                  ],
-                ),
+              bottomNavigationBar: BottomNavigationBar(
+                backgroundColor: Colors.grey[300],
+                iconSize: 24,
+                showUnselectedLabels: false,
+                showSelectedLabels: false,
+                type: BottomNavigationBarType.fixed,
+                currentIndex: model.currentIndex,
+                onTap: model.setIndex,
+                items: [
+                  BottomNavigationBarItem(
+                    icon: homeIcon(),
+                    label: 'Home',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.notifications),
+                    label: 'notifications',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: globeIcon(),
+                    label: 'feed',
+                  ),
+                ],
               ),
               body: BottomSheetManager(
                 child: getViewForIndex(model.currentIndex),
