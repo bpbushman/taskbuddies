@@ -126,6 +126,20 @@ class FirestoreService {
     }
   }
 
+  Future getUserListCount(User user) async {
+    try {
+      var result = await _listRef
+          .document(user.uid)
+          .collection('userLists')
+          .getDocuments()
+          .then((value) => value.documents.length);
+      return result;
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
+//do not remove, shit breaketh broh
   List<Todo> _newlistFromMap(List<dynamic> todo) {
     if (todo.isEmpty) {
       return [];
