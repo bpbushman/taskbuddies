@@ -141,4 +141,19 @@ class BuddyService {
       return e.toString();
     }
   }
+
+  Future getUserFollowerCount(User user) async {
+    try {
+      var result = await _followerRef
+          .document(user.uid)
+          .collection('userFollowers')
+          .getDocuments()
+          .then((value) {
+        return value.documents.length;
+      });
+      return result;
+    } catch (e) {
+      return e;
+    }
+  }
 }

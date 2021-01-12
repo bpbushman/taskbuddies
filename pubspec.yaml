@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   uuid: ^2.2.2
+  shared_preferences: ^0.5.12+4
   #ui helpers
   pixel_border: ^1.0.0
   expansion_tile_card: ^1.1.0

@@ -36,7 +36,7 @@ exports.onCreateFollower = functions.firestore
     });
   });
 
-exports.onDeleteFollower = functions.firestore
+/*exports.onDeleteFollower = functions.firestore
   .document("/followers/{userId}/userFollowers/{followerId}")
   .onDelete(async (snapshot, context) => {
     console.log("Follower Deleted", snapshot.id);
@@ -155,3 +155,4 @@ exports.onDeletePost = functions.firestore
         });
     });
   });
+  */

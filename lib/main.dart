@@ -3,8 +3,13 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:taskbuddies/app/locator.dart';
 import 'package:taskbuddies/app/router.gr.dart';
 
-void main() {
+Future<void> main() async {
   setupLocator();
+  try {
+    await futureLocator();
+  } catch (error) {
+    print('error');
+  }
   runApp(MyApp());
 }
 

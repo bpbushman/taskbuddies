@@ -7,6 +7,7 @@ import 'package:taskbuddies/ui/views/feed/feed_view.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view_model.dart';
 import 'package:taskbuddies/ui/views/notifications/notifications_view.dart';
+import 'package:taskbuddies/ui/views/profile/profile_view.dart';
 import 'home_view_model.dart';
 
 class HomeView extends StatelessWidget {
@@ -15,8 +16,10 @@ class HomeView extends StatelessWidget {
       case 0:
         return TodoListView();
       case 1:
-        return NotificationsView();
+        return ProfileView();
       case 2:
+        return NotificationsView();
+      case 3:
         return FeedView();
       default:
         return TodoListView();
@@ -72,6 +75,10 @@ class HomeView extends StatelessWidget {
                     label: 'Home',
                   ),
                   BottomNavigationBarItem(
+                    icon: Icon(Icons.person),
+                    label: 'profile',
+                  ),
+                  BottomNavigationBarItem(
                     icon: Icon(Icons.notifications),
                     label: 'notifications',
                   ),
@@ -85,17 +92,16 @@ class HomeView extends StatelessWidget {
                 child: getViewForIndex(model.currentIndex),
               ),
               floatingActionButton: RaisedButton(
-                color: Colors.black26,
-                onPressed: () {
-                  locator<TodoListViewModel>().addNewList();
-                },
-                shape: PixelBorder(
-                    borderRadius: BorderRadius.circular(20), pixelSize: 5),
-                child: Text(
-                  'Make a new List',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
+                  color: Colors.black26,
+                  onPressed: () {
+                    locator<TodoListViewModel>().addNewList();
+                  },
+                  shape: PixelBorder(
+                      borderRadius: BorderRadius.circular(8), pixelSize: 4),
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  )),
             ),
         viewModelBuilder: () => HomeViewModel());
   }
