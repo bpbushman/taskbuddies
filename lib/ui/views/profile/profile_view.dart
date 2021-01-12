@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:taskbuddies/app/locator.dart';
-import 'package:taskbuddies/services/authentication_service.dart';
+import 'package:stacked/stacked.dart';
+import 'package:taskbuddies/ui/views/profile/profile_view_model.dart';
+import 'package:taskbuddies/ui/widgets/helpers.dart';
 
-// ignore: must_be_immutable
 class ProfileView extends StatelessWidget {
-  AuthenticationService authService = locator<AuthenticationService>();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text('HELLO, ${authService.currentUser.username}'),
-        Divider(),
-        Center(
-          child: GestureDetector(
-            child: Text('LOG OUT'),
-            onTap: () => authService.signout(),
-          ),
-        )
-      ],
+    return ViewModelBuilder.reactive(
+      onModelReady: (model) => model.fetchCounts(),
+      builder: (context, model, child) => Column(
+        children: [
+          Text(model.authService.currentUser.username),
+          largeVertSpace(),
+          Text('Buddies: ${model.buddyCount}'),
+          smallVertSpace(),
+          Text('Lists: ${model.listCount}'),
+        ],
+      ),
+      viewModelBuilder: () => ProfileViewModel(),
     );
   }
 }

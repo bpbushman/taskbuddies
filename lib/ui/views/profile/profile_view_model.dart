@@ -14,4 +14,32 @@ class ProfileViewModel extends BaseViewModel {
 
   int _buddyCount;
   int get buddyCount => _buddyCount;
+
+  void _fetchListCount() async {
+    var result =
+        await _firestoreService.getUserListCount(authService.currentUser);
+    if (result is String) {
+      print(result);
+    } else {
+      _listCount = result;
+      notifyListeners();
+    }
+  }
+
+  void _fetchBuddyCount() async {
+    var result =
+        await _buddyService.getUserFollowerCount(authService.currentUser);
+    if (result is String) {
+      print(result);
+    } else {
+      _buddyCount = result;
+      notifyListeners();
+    }
+  }
+
+  void fetchCounts() {
+    _fetchBuddyCount();
+    _fetchListCount();
+    //notifyListeners();
+  }
 }
