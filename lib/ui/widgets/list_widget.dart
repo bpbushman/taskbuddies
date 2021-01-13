@@ -17,6 +17,27 @@ class ListContainer extends StatefulWidget {
 }
 
 class _ListContainerState extends State<ListContainer> {
+  checkIfListIsDone({Widget child}) {
+    if (widget.myList.complete.length >= 1 &&
+        widget.myList.incomplete.length == 0) {
+      return doneGif();
+    } else
+      return child;
+  }
+
+  Widget doneGif() {
+    return Column(
+      children: [
+        Image.asset(
+          "assets/gifs/done.gif",
+          //height: 75.0,
+          //width: 75.0,
+        ),
+        Text('All tasks completed!')
+      ],
+    );
+  }
+
   double getIndicatorValue() {
     double a = widget.myList.incomplete.length.toDouble();
     double b = widget.myList.complete.length.toDouble();
@@ -49,8 +70,38 @@ class _ListContainerState extends State<ListContainer> {
           children: [
             listIndicator(getIndicatorValue()),
             ExpansionTileCard(
+              leading: Column(
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.check_box_outline_blank,
+                        color: Colors.grey,
+                      ),
+                      Text(
+                        '${widget.myList.incomplete.length}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.check_box_outlined,
+                        color: Colors.grey,
+                      ),
+                      Text(
+                        '${widget.myList.complete.length}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
               finalPadding: EdgeInsets.symmetric(vertical: 0),
-              elevation: 0,
+              elevation: 6,
               baseColor: Colors.grey[100],
               borderRadius: BorderRadius.circular(0),
               title: listHeader(
@@ -58,9 +109,11 @@ class _ListContainerState extends State<ListContainer> {
                 widget.myList.description,
               ),
               children: [
-                ListView(
-                  shrinkWrap: true,
-                  children: addTodoToWidget(),
+                checkIfListIsDone(
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: addTodoToWidget(),
+                  ),
                 ),
                 ButtonBar(
                   alignment: MainAxisAlignment.center,
@@ -70,7 +123,7 @@ class _ListContainerState extends State<ListContainer> {
                     commentIcon(),
                     mediumHorizontalSpace(),
                     IconButton(
-                      icon: Icon(Icons.add_circle),
+                      icon: Icon(Icons.add_circle_outline_sharp),
                       color: Colors.blue,
                       onPressed: () {
                         locator<TodoListViewModel>().addItem(widget.myList);
