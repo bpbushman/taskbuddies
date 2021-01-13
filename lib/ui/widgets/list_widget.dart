@@ -16,6 +16,17 @@ class ListContainer extends StatefulWidget {
 }
 
 class _ListContainerState extends State<ListContainer> {
+  double getIndicatorValue() {
+    double a = widget.myList.incomplete.length.toDouble();
+    double b = widget.myList.complete.length.toDouble();
+    double value;
+
+    if ((a == 0 && b == 0)) return 1;
+
+    value = ((b) / (a + b));
+    return value;
+  }
+
   addTodoToWidget() {
     List<TaskTile> tiles = [];
     widget.myList.incomplete.forEach((element) {
@@ -33,46 +44,57 @@ class _ListContainerState extends State<ListContainer> {
     return Container(
       child: Padding(
         padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
-        child: ExpansionTileCard(
-          elevation: 5.0,
-          baseColor: Colors.grey[100],
-          borderRadius: BorderRadius.circular(0),
-          leading: CircleAvatar(
-            child: Text('${widget.myList.incomplete.length}'),
-          ),
-          title: Row(
-            children: [
-              Text(widget.myList.title),
-            ],
-          ),
-          subtitle: Text(widget.myList.description),
+        child: Column(
           children: [
-            ListView(
-              shrinkWrap: true,
-              children: addTodoToWidget(),
+            LinearProgressIndicator(
+              value: getIndicatorValue(),
+              backgroundColor: Colors.grey,
+              valueColor: (getIndicatorValue() == 1)
+                  ? AlwaysStoppedAnimation(Colors.green)
+                  : AlwaysStoppedAnimation(Colors.orangeAccent),
             ),
-            ButtonBar(
-              alignment: MainAxisAlignment.center,
+            ExpansionTileCard(
+              elevation: 0,
+              baseColor: Colors.grey[100],
+              borderRadius: BorderRadius.circular(0),
+              leading: CircleAvatar(
+                child: Text('${widget.myList.incomplete.length}'),
+              ),
+              title: Row(
+                children: [
+                  Text(widget.myList.title),
+                ],
+              ),
+              subtitle: Text(widget.myList.description),
               children: [
-                loveIcon(),
-                mediumHorizontalSpace(),
-                commentIcon(),
-                mediumHorizontalSpace(),
-                IconButton(
-                  icon: Icon(Icons.add_circle),
-                  color: Colors.blue,
-                  onPressed: () {
-                    locator<TodoListViewModel>().addItem(widget.myList);
-                  },
+                ListView(
+                  shrinkWrap: true,
+                  children: addTodoToWidget(),
                 ),
-                IconButton(
-                  icon: Icon(Icons.cancel_rounded),
-                  color: Colors.red,
-                  onPressed: () =>
-                      locator<TodoListViewModel>().deleteList(widget.myList),
-                ),
+                ButtonBar(
+                  alignment: MainAxisAlignment.center,
+                  children: [
+                    loveIcon(),
+                    mediumHorizontalSpace(),
+                    commentIcon(),
+                    mediumHorizontalSpace(),
+                    IconButton(
+                      icon: Icon(Icons.add_circle),
+                      color: Colors.blue,
+                      onPressed: () {
+                        locator<TodoListViewModel>().addItem(widget.myList);
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.cancel_rounded),
+                      color: Colors.red,
+                      onPressed: () => locator<TodoListViewModel>()
+                          .deleteList(widget.myList),
+                    ),
+                  ],
+                )
               ],
-            )
+            ),
           ],
         ),
       ),

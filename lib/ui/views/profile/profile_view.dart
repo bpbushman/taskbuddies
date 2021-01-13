@@ -10,11 +10,31 @@ class ProfileView extends StatelessWidget {
       onModelReady: (model) => model.fetchCounts(),
       builder: (context, model, child) => Column(
         children: [
-          Text(model.authService.currentUser.username),
-          largeVertSpace(),
-          Text('Buddies: ${model.buddyCount}'),
+          Text(
+            'Hello,',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           smallVertSpace(),
-          Text('Lists: ${model.listCount}'),
+          Text(model.userName),
+          largeVertSpace(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Buddies: ${model.buddyCount}'),
+              mediumHorizontalSpace(),
+              Text('Lists: ${model.listCount}'),
+            ],
+          ),
+          largeVertSpace(),
+          Center(
+            child: RaisedButton(
+              child: Text('Sign Out'),
+              onPressed: () => model.signOut(),
+            ),
+          ),
         ],
       ),
       viewModelBuilder: () => ProfileViewModel(),

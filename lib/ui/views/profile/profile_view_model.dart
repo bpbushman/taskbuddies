@@ -5,9 +5,11 @@ import 'package:taskbuddies/services/buddy_services.dart';
 import 'package:taskbuddies/services/firestore_service.dart';
 
 class ProfileViewModel extends BaseViewModel {
-  final AuthenticationService authService = locator<AuthenticationService>();
+  final AuthenticationService _authService = locator<AuthenticationService>();
   final FirestoreService _firestoreService = locator<FirestoreService>();
   final BuddyService _buddyService = locator<BuddyService>();
+
+  String get userName => _authService.currentUser.username;
 
   int _listCount;
   int get listCount => _listCount;
@@ -17,7 +19,7 @@ class ProfileViewModel extends BaseViewModel {
 
   void _fetchListCount() async {
     var result =
-        await _firestoreService.getUserListCount(authService.currentUser);
+        await _firestoreService.getUserListCount(_authService.currentUser);
     if (result is String) {
       print(result);
     } else {
@@ -28,7 +30,7 @@ class ProfileViewModel extends BaseViewModel {
 
   void _fetchBuddyCount() async {
     var result =
-        await _buddyService.getUserFollowerCount(authService.currentUser);
+        await _buddyService.getUserFollowerCount(_authService.currentUser);
     if (result is String) {
       print(result);
     } else {
@@ -37,9 +39,10 @@ class ProfileViewModel extends BaseViewModel {
     }
   }
 
+  void signOut() => _authService.signout();
+
   void fetchCounts() {
     _fetchBuddyCount();
     _fetchListCount();
-    //notifyListeners();
   }
 }
