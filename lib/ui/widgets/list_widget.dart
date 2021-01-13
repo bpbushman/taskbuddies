@@ -5,6 +5,7 @@ import 'package:taskbuddies/models/todo_list.dart';
 import 'package:taskbuddies/ui/views/list_view/list_view_model.dart';
 import 'package:taskbuddies/ui/widgets/custom_icons.dart';
 import 'package:taskbuddies/ui/widgets/helpers.dart';
+import 'package:taskbuddies/ui/widgets/list_header.dart';
 
 class ListContainer extends StatefulWidget {
   final TodoList myList;
@@ -46,26 +47,16 @@ class _ListContainerState extends State<ListContainer> {
         padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
         child: Column(
           children: [
-            LinearProgressIndicator(
-              value: getIndicatorValue(),
-              backgroundColor: Colors.grey,
-              valueColor: (getIndicatorValue() == 1)
-                  ? AlwaysStoppedAnimation(Colors.green)
-                  : AlwaysStoppedAnimation(Colors.orangeAccent),
-            ),
+            listIndicator(getIndicatorValue()),
             ExpansionTileCard(
+              finalPadding: EdgeInsets.symmetric(vertical: 0),
               elevation: 0,
               baseColor: Colors.grey[100],
               borderRadius: BorderRadius.circular(0),
-              leading: CircleAvatar(
-                child: Text('${widget.myList.incomplete.length}'),
+              title: listHeader(
+                widget.myList.title,
+                widget.myList.description,
               ),
-              title: Row(
-                children: [
-                  Text(widget.myList.title),
-                ],
-              ),
-              subtitle: Text(widget.myList.description),
               children: [
                 ListView(
                   shrinkWrap: true,
